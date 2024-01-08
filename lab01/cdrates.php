@@ -16,7 +16,7 @@
         echo "</ul>";
         echo "<p>$1000 minimum deposit.</p>";
     ?>
-    <!-- Dang Nam Khanh 8/1/2024 -->
+    <!-- Student ID: 104225661 / Dang Nam Khanh 8/1/2024 -->
 
 </body>
 </html>
