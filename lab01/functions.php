@@ -9,8 +9,6 @@
 
 <body>
     <h1>Use of PHP built-in functions</h1>
-    <?php
-    ?>
 
     <?php
     /* Use of abs() and pow() built-in functions, and echo statement. */
