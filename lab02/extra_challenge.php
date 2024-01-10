@@ -8,7 +8,7 @@
 <body>
     <form action="iseven.php" method="get">
         <label for="number">Enter a number:</label>
-        <input type="number" id="number" name="number">
+        <input type="text" id="number" name="number">
         <button type="submit">Submit</button>
     </form>
     

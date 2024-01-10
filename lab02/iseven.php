@@ -10,9 +10,8 @@
 
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             if (isset($_GET["number"] ) && !empty($_GET["number"])) {
-                $number = $_GET["number"];
-
-                if (is_numeric($number)) {
+                if (is_numeric($_GET["number"])) {
+                    $number = round($_GET["number"]);
                     $result = ($number % 2 == 0) ? "even" : "odd";
                     echo "<p>The variable $number contains an $result number.</p>";
                 } else {
@@ -20,17 +19,8 @@
                 }
             } else {
                 header("Location: extra_challenge.php");
-                echo "<p>Please enter a number.</p>";
             }
         }
-
-        $number = 7.1;
-        $number = intval(round($number));
-        echo "<p>$number</p>";
-        $message = is_numeric($number) && $number === 7 ? "is seven" : "is not seven";
-
-        echo "<p>$message</p>"
-        
     ?>
 </body>
 </html>

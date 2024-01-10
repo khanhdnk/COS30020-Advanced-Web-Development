@@ -23,8 +23,8 @@
 
         //reassigning the values of the array
         $daysInFrench = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-        foreach($days as $i => &$day){
-            $day = $daysInFrench[$i];
+        for ($i = 0; $i < count($days); $i++) {
+            $days[$i] = $daysInFrench[$i];
         }
         //Print days in French
         echo "<p>The days of the week in French are:</p>";
