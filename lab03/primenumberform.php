@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Number Form</title>
+</head>
+<body>
+    <form action="primenumber.php" method="GET">
+        <label for="number">Enter a number:</label>
+        <input type="text" id="number" name="number">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
