@@ -13,9 +13,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2b3yAGXL2GhbW6eKFyR40nSZ8M4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -26,7 +26,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/XAMPP/htdocs/webdev",
+    "last_opened_file_path": "D:/COS30049/COS30049/main",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
@@ -41,6 +41,7 @@
       <option name="presentableId" value="Default" />
       <updated>1705457915733</updated>
       <workItem from="1705457919623" duration="65000" />
+      <workItem from="1705482850742" duration="109000" />
     </task>
     <servers />
   </component>
