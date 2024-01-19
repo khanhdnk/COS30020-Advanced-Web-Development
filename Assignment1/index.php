@@ -15,7 +15,7 @@
             <li><a href="about.php">About assignment</a></li>
         </ul>
     </nav>
-    <div>
+    <div class="container">
         <p>Name: Dang Nam Khanh</p>
         <p>Student ID: 104225661</p>
         <p>Email: <a href="">104225661@student.swin.edu.au</a></p>
