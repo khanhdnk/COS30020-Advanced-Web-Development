@@ -22,10 +22,43 @@
     function validateInputField($name, $value, $pattern, $error)
     {
         if (!isset($value) || empty($value)) {
-            return "<p>Please provide the $name.</p>";
-        } else {
+            echo "<p>Please provide the $name.</p>";
+        }
+        else if (!preg_match($pattern, $value)) {
+            echo "<p>$error</p>";
+        }
+        else{
+            return $value;
+        }
+        return null;
+    }
+
+    function isPositionIdUnique($positionId, $pathToFile)
+    {
+        // If the file doesn't exist, we can assume the position ID is unique
+        if (!file_exists($pathToFile)) {
             return true;
         }
+    
+        $fileHandle = fopen($pathToFile, 'r');
+    
+        // If the file couldn't be opened, throw an exception
+        if (!$fileHandle) {
+            throw new Exception("Unable to open file: $pathToFile");
+        }
+    
+        while (($line = fgets($fileHandle)) !== false) {
+            $lineData = explode("\t", $line);
+            $existingPositionId = isset($lineData[0]) ? trim($lineData[0]) : null;
+    
+            if ($existingPositionId === $positionId) {
+                fclose($fileHandle);
+                return false; // Position ID already exists
+            }
+        }
+    
+        fclose($fileHandle);
+        return true; // Position ID is unique
     }
 
     ?>
