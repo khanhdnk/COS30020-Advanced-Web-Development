@@ -28,8 +28,8 @@
             <input type="text" name="title" id="title">
 
             <br>
-            <label for="description">Description:</label>
-            <input type="text" name="description" id="description">
+            <label for="description">Description:</label><br>
+            <textarea name="description" id="description" cols="30" rows="5"></textarea>
 
             <br>
             <label for="closingDate">Closing Date</label>
@@ -47,7 +47,7 @@
             <span>Contract:</span>
             <input type="radio" name="onGoing" id="onGoing">
             <label for="onGoing">On-going</label>
-            
+
             <input type="radio" name="fixedTerm" id="fixedTerm">
             <label for="fixedTerm">Fixed Term</label>
 
@@ -63,12 +63,17 @@
             <label for="location">Location:</label>
             <select id="location" name="location">
                 <option value="none">---</option>
-                <option value="hanoi">Hanoi</option>
-                <option value="danang">DaNang</option>
-                <option value="saigon">Saigon</option>
-                <!-- Add more options as needed -->
+                <option value="act">ACT</option>
+                <option value="nsw">NSW</option>
+                <option value="nt">NT</option>
+                <option value="qld">QLD</option>
+                <option value="sa">SA</option>
+                <option value="tas">TAS</option>
+                <option value="vic">VIC</option>
+                <option value="wa">WA</option>
             </select>
-            
+
+
             <br>
             <input type="submit" value="Post">
             <input type="reset" value="Reset">

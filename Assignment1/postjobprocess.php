@@ -62,13 +62,18 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $title = validateInputField('title', $_POST['title'], '/^[\p{L}0-9 ,.!]{1,20}$/u', 'Title must only contain letters (maximum 20 characters), numbers, and spaces.');
-        if (!$title) {
-            echo "this is null";
+        $positionID = validateInputField('position ID', $_POST['positionID'], '/^PID\d{4}$/', 'Position ID must be starts with "PID" and followed by 4 digits.');
+        $description = validateInputField('description', $_POST['description'], '/^.{1,250}$/', 'Description must only contain letters (maximum 250 characters), numbers, and spaces.');
+        if (!$title || !$positionID || !$description) {
+            echo "Your sucks";
         }
-        if (isPositionIdUnique($_POST['positionID'], 'jobposts/jobs.txt')) {
-            echo "this is unique";
-        } else {
-            echo "this is not unique";
+        else{
+            echo "this is legit";
+            if (isPositionIdUnique($_POST['positionID'], 'jobposts/jobs.txt')) {
+                echo "this is unique";
+            } else {
+                echo "this is not unique";
+            }
         }
     }
 
