@@ -48,8 +48,8 @@
         }
     
         while (($line = fgets($fileHandle)) !== false) {
-            $lineData = explode("\t", $line);
-            $existingPositionId = isset($lineData[0]) ? trim($lineData[0]) : null;
+            $attributes = explode("\t", $line);
+            $existingPositionId = isset($attributes[0]) ? trim($attributes[0]) : null;
     
             if ($existingPositionId === $positionId) {
                 fclose($fileHandle);
@@ -61,7 +61,17 @@
         return true; // Position ID is unique
     }
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $title = validateInputField('title', $_POST['title'], '/^[\p{L}0-9 ,.!]{1,20}$/u', 'Title must only contain letters, numbers, and spaces.');
+        if (!$title){
+            echo "shit";
+        }
+    }
+
+
+
     ?>
+    
 </body>
 
 </html>

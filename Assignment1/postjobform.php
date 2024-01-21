@@ -19,7 +19,7 @@
     </nav>
 
     <div class="container">
-        <form action="" method="POST">
+        <form action="postjobprocess.php" method="POST">
             <label for="positionID">Position ID:</label>
             <input type="text" name="positionID" id="positionID">
 
