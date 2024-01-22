@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="462c0ac0-c34e-4bb7-a93c-b8835c569a00" name="Changes" comment="U">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment1/postjobprocess.php" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment1/postjobprocess.php" afterDir="false" />
-    </list>
+    <list default="true" id="462c0ac0-c34e-4bb7-a93c-b8835c569a00" name="Changes" comment="U" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,7 +70,7 @@
       <workItem from="1705725847713" duration="1264000" />
       <workItem from="1705738472739" duration="75000" />
       <workItem from="1705827772612" duration="1459000" />
-      <workItem from="1705837801143" duration="814000" />
+      <workItem from="1705837801143" duration="1415000" />
     </task>
     <servers />
   </component>
