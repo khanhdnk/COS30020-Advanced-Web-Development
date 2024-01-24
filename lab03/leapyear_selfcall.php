@@ -10,20 +10,14 @@
 <body>
     <h1>Lab03 Task 2 - Leap Year</h1>
     <hr>
+    <!-- Form for user input with a text field to enter the year -->
+    <form action="leapyear_selfcall.php" method="GET">
+        <label for="year">Enter a year:</label>
+        <input type="text" id="year" name="year">
+        <input type="submit" value="Submit">
+    </form>
 
     <?php
-    // Function to sanitize user input: trim, remove backslashes, convert special characters to HTML entities,
-    // remove HTML and PHP tags, and round the input to the nearest integer
-    function sanitiseInput($input)
-    {
-        $input = trim($input);
-        $input = stripslashes($input);
-        $input = htmlspecialchars($input);
-        $input = strip_tags($input); // Remove HTML and PHP tags
-        $input = round($input); // Round the input to the nearest integer
-        return $input;
-    }
-
     // Function to check if a year is a leap year
     function is_leapyear($year)
     {
@@ -35,14 +29,15 @@
         }
     }
 
-    // Example usage
+    // Check if the form is submitted and the input is provided
     if (isset($_GET["year"]) && !empty($_GET["year"])) {
+
         // Check if the input is a numeric value and greater than or equal to 0
         if (!is_numeric($_GET["year"]) || $_GET["year"] < 0) {
             echo "<p>Please provide a valid positive number for the year.</p>";
         } else {
-            // Validate and round the input using the sanitiseInput function
-            $year = sanitiseInput($_GET["year"]);
+            // Validate and round the input to the nearest integer
+            $year = round($_GET["year"]);
 
             // Check if the rounded year is a leap year
             if (is_leapyear($year)) {
@@ -56,7 +51,6 @@
         echo "<p>Please provide a year.</p>";
     }
     ?>
-
 </body>
 
 </html>
