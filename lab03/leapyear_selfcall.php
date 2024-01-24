@@ -38,7 +38,6 @@
         } else {
             // Validate and round the input to the nearest integer
             $year = round($_GET["year"]);
-
             // Check if the rounded year is a leap year
             if (is_leapyear($year)) {
                 echo "<p>$year is a leap year.</p>";
