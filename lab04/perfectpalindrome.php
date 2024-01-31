@@ -13,8 +13,9 @@ if (isset($_POST['str']) && !empty($_POST['str'])) {
 
     // Check if the input string matches the pattern
     if (preg_match($pattern, $_POST['str'])) {
-        $str = $_POST['str'];
-        $reverse_string = strrev($str);
+        $initial_str = $_POST['str'];
+        $str = htmlentities($_POST['str']);
+        $reverse_string = htmlentities(strrev($initial_str));
         if (strcmp(strtolower($str), strtolower($reverse_string)) === 0) {
             echo "<p>$str is a perfect palindrome.</p>";
         } else {
