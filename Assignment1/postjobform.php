@@ -33,30 +33,30 @@
 
             <br>
             <label for="closingDate">Closing Date</label>
-            <input type="text" name="closingDate" id="closingDate">
+            <input type="text" name="closingDate" id="closingDate" value="<?php echo date('d/m/y'); ?>">
 
             <br>
             <span>Position:</span>
-            <input type="radio" name="fullTime" id="fullTime">
-            <label for="fullTime">Full Time</label>
+            <input type="radio" name="position" id="fullTime" value="Full Time">
+            <label for="position">Full Time</label>
 
-            <input type="radio" name="partTime" id="partTime">
-            <label for="partTime">Part Time</label>
+            <input type="radio" name="position" id="partTime" value="Part Time">
+            <label for="position">Part Time</label>
 
             <br>
             <span>Contract:</span>
-            <input type="radio" name="onGoing" id="onGoing">
+            <input type="radio" name="contract" id="Going" value="On-Going">
             <label for="onGoing">On-going</label>
 
-            <input type="radio" name="fixedTerm" id="fixedTerm">
+            <input type="radio" name="contract" id="fixedTerm" value="Fixed term">
             <label for="fixedTerm">Fixed Term</label>
 
             <br>
             <span>Application by:</span>
-            <input type="textbox" name="post" id="post">
+            <input type="checkbox" name="application[]" id="post" value="Post">
             <label for="post">Post</label>
 
-            <input type="textbox" name="mail" id="mail">
+            <input type="checkbox" name="application[]" id="mail" value="Mail">
             <label for="mail">Mail</label>
             <br>
 
