@@ -19,6 +19,14 @@
     </nav>
 
     <?php
+    umask(0007);
+    $dir = "../../data/jobposts";
+
+    if (!file_exists($dir)) {
+      mkdir($dir, 02770, true);
+    }
+
+    $file = '../../data/jobposts/jobs.txt';
     function validateInputField($name, $value, $pattern, $error)
     {
         if (!isset($value) || empty($value)) {
@@ -79,7 +87,16 @@
         }
         return null;
     }
-    echo $_POST['location'];
+
+    function validateSelection($value, $error)
+    {
+        if ($value === 'none' || empty($value)) {
+            echo "<p>$error</p>";
+        } else {
+            return $value;
+        }
+        return null;
+    }
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $title = validateInputField('title', $_POST['title'], '/^[\p{L}0-9 ,.!]{1,20}$/u', 'Title must only contain letters (maximum 20 characters), numbers, and spaces.');
         $positionID = validateInputField('position ID', $_POST['positionID'], '/^PID\d{4}$/', 'Position ID must be starts with "PID" and followed by 4 digits.');
@@ -88,15 +105,15 @@
         $position = validateRadio(isset($_POST['position'])? $_POST['position']:'', 'Position must be selected.');
         $contract = validateRadio(isset($_POST['contract'])? $_POST['contract']:'', 'Contract must be selected.');
         $application = validateCheckbox(isset($_POST['application'])? $_POST['application']: '', 'Application by must be selected with at least 1 option.');
+        $location = validateSelection(isset($_POST['location'])?$_POST['location']:'', 'Location must be selected.');
 
-
-        if (!$title || !$positionID || !$description) {
+        if (!$title || !$positionID || !$description || !$closingDate || !$position || !$contract || !$application || !$location) {
             echo "Your sucks";
         }
         else{
             echo "this is legit";
-            if (isPositionIdUnique($_POST['positionID'], 'jobposts/jobs.txt')) {
-                echo "this is unique";
+            if (isPositionIdUnique($_POST['positionID'], $file)) {
+                $record = "$title\t$positionID\t$description\t$closingDate\t$position\t$contract\t$application\t$location\n";
             } else {
                 echo "this is not unique";
             }
