@@ -108,7 +108,7 @@
         $location = validateSelection(isset($_POST['location'])?$_POST['location']:'', 'Location must be selected.');
 
         if (!$title || !$positionID || !$description || !$closingDate || !$position || !$contract || !$application || !$location) {
-            echo "Your sucks";
+            echo "You are not passing the validation. Please try again.";
         }
         else{
             echo "this is legit";
