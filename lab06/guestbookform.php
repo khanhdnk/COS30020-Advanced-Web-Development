@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Lab06 Task 2 - Guestbook</h1>
-    <form action="guestbooksave.php">
+    <form action="guestbooksave.php" method="POST">
         <fieldset>
             <legend><b>Enter your details to sign our guest book</b></legend>
             <label for="name">Name:</label>

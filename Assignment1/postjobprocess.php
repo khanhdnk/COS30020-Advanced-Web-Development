@@ -26,7 +26,7 @@
       mkdir($dir, 02770, true);
     }
 
-    $file = '../../data/jobposts/jobs.txt';
+    $filePath = '../../data/jobposts/jobs.txt';
     function validateInputField($name, $value, $pattern, $error)
     {
         if (!isset($value) || empty($value)) {
@@ -43,7 +43,7 @@
     {
         // If the file doesn't exist, we can assume the position ID is unique
         if (!file_exists($pathToFile)) {
-            echo"this is not exist";
+            echo "file does not exist";
             return true;
         }
 
@@ -56,9 +56,10 @@
 
         while (($line = fgets($fileHandle)) !== false) {
             $attributes = explode("\t", $line);
-            $existingPositionId = isset($attributes[0]) ? trim($attributes[0]) : null;
+            $existingPositionId = isset($attributes[1]) ? trim($attributes[1]) : null;
+            echo $attributes[4];
 
-            if ($existingPositionId === $positionId) {
+            if ($existingPositionId == $positionId) {
                 fclose($fileHandle);
                 return false; // Position ID already exists
             }
@@ -108,14 +109,21 @@
         $location = validateSelection(isset($_POST['location'])?$_POST['location']:'', 'Location must be selected.');
 
         if (!$title || !$positionID || !$description || !$closingDate || !$position || !$contract || !$application || !$location) {
-            echo "You are not passing the validation. Please try again.";
+            echo "<p style='color: red'>You are not passing the validation. Please try again.</p>";
         }
         else{
-            echo "this is legit";
-            if (isPositionIdUnique($_POST['positionID'], $file)) {
+            echo "<p>this is just ok</p>";
+            if (isPositionIdUnique($_POST['positionID'], $filePath)) {
                 $record = "$title\t$positionID\t$description\t$closingDate\t$position\t$contract\t$application\t$location\n";
+                if (file_exists($filePath)) {
+                    file_put_contents($filePath, $record, FILE_APPEND);
+                } else {
+                    file_put_contents($filePath, $record);
+                }
+                echo "<p style='color: green;'>Job has been posted successfully.</p>";
+
             } else {
-                echo "this is not unique";
+                echo "<p>This position ID is not unique</p>";
             }
         }
     }

@@ -31,7 +31,7 @@
             fclose($handle); // close the text file
             $newdata = !(in_array($item, $itemdata)); // check if item exists in array
         } else {
-            $newdata = true; // file does not exists, thus it must be a new data
+            $newdata = true; // file does not exist, thus it must be a new data
         }
         if ($newdata) {
             $handle = fopen($filename, "a"); // open the file in append mode
