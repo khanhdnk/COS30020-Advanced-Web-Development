@@ -142,7 +142,12 @@
 
 
 
-
+<!--extra features:-->
+<!--    - sanitise input-->
+<!--    - view detail?-->
+<!--    - job view history?-->
+<!--    - job view count?-->
+<!--    - darkmode?-->
 </body>
 
 </html>
