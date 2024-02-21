@@ -13,7 +13,7 @@
         <label for="item">Item:</label>
         <input type="text" name="item" id="item"> <br><br>
         <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" id="quantity"><br><br>
+        <input type="text" name="quantity" id="quantity"><br><br>
         <input type="submit" value="Submit">
     </form>
 </body>

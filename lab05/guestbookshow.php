@@ -24,6 +24,16 @@
         echo "<p>Guest book entries:</p>
                   <pre>$data</pre>"; // Display the guestbook entries in a <pre> element
         fclose($handle); // Close the file handle
+        echo "<br/>";
+        $data = file_get_contents($filename); // Read the entire file into a string
+
+        if ($data === false) { // Check if reading the file failed
+            echo "<p style='color:red'>Failed to read guestbook file!</p>"; // Display an error message
+        } else {
+            echo "<p>Guest book entries:</p>
+              <pre>$data</pre>";
+
+        }
     }
     ?>
 </body>
