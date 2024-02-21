@@ -22,7 +22,7 @@
     $filePath = '../../data/jobposts/jobs.txt';
     if (isset($_GET['jobTitle']) && !empty($_GET['jobTitle'])) {
         $jobTitle = $_GET['jobTitle'];
-        $position = $
+        $position = $_GET['position'];
         if (!file_exists($filePath)) {
             echo "<p style='color: red'>No job posts found.</p>";
             return;
