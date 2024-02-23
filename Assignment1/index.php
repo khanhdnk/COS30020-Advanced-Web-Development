@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+
     <title>Document</title>
 </head>
 <body>
@@ -15,7 +17,7 @@
             <li><a href="about.php">About assignment</a></li>
         </ul>
     </nav>
-    <div class="container">
+    <div class="container mx-auto">
         <p>Name: Dang Nam Khanh</p>
         <p>Student ID: 104225661</p>
         <p>Email: <a href="">104225661@student.swin.edu.au</a></p>
