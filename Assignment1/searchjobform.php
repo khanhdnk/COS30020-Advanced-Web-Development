@@ -23,7 +23,8 @@
     <form action="searchjobprocess.php" method="GET">
         <h1>Job Vacancy Posting System</h1>
         <label for="jobTitle" class="block text-gray-700 text-sm font-bold mb-2">Job Title</label>
-        <input type="text" name="jobTitle" id="jobTitle" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-60 h-10">
+        <input type="text" name="jobTitle" id="jobTitle"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-60 h-10">
         <br>
         <span>Position:</span>
         <input type="radio" name="position" id="fullTime" value="Full Time" class="">
@@ -58,11 +59,12 @@
             <option value="vic">VIC</option>
             <option value="wa">WA</option>
         </select>
-        <input type="submit" value="Search" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <input type="submit" value="Search"
+               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         <br>
 
     </form>
-        <a href="index.php">Return to Home Page</a>
+    <a href="index.php">Return to Home Page</a>
 </body>
 
 </html>

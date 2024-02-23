@@ -19,17 +19,41 @@
         </ul>
     </nav>
     <?php
+    require 'sanitiseInput.php';
     $filePath = '../../data/jobposts/jobs.txt';
+    function validateCheckbox($value)
+    {
+        if (isset($value)) {
+            return sanitiseInput(implode(', ', $value)) ;
+        } else {
+            return false;
+
+        }
+    }
+
+    function validateLocation($value)
+    {
+        if ($value !== 'none') {
+            return $value;
+        } else {
+            return false;
+        }
+    }
+
     if (isset($_GET['jobTitle']) && !empty($_GET['jobTitle'])) {
-        $jobTitle = $_GET['jobTitle'];
-        $position = $_GET['position'];
+        $jobTitle = strtolower( sanitiseInput($_GET['jobTitle']));
+        $position = isset($_GET['position']) ? $_GET['position'] : false;
+        $contract = isset($_GET['contract']) ? $_GET['contract'] : false;
+        $application = isset($_GET['application'])? validateCheckbox($_GET['application']) : false;
+        $location = isset($_GET['location'])? validateLocation($_GET['location']) : false;
+
         if (!file_exists($filePath)) {
             echo "<p style='color: red'>No job posts found.</p>";
             return;
         }else{
             $handle = fopen($filePath, 'r');
             if ($handle) {
-                echo "<table border='1'>";
+                echo "<table class='table-auto border-2'>";
                 echo "<tr>
                         <th>Title</th>
                         <th>Position ID</th>
@@ -42,16 +66,22 @@
                         </tr>";
                 while (($line = fgets($handle)) !== false) {
                     $attributes = explode("\t", $line);
-                    if (isset($attributes[0]) && strpos($attributes[0], $jobTitle) !== false) {
+                    if ((isset($attributes[0]) && strpos(strtolower($attributes[0]), $jobTitle) !== false) && //using isset in case the field jobtitle is broken
+                    (!$position || strpos($attributes[4], $position) !== false) &&
+                    (!$contract || strpos($attributes[5], $contract) !== false) &&
+                    (!$application || strpos($attributes[6], $application) !== false) &&
+                    (!$location || strpos($attributes[7], $location) !== false))
+
+                    {
                         echo "<tr>";
-                        echo "<td>" . $attributes[0] . "</td>";
-                        echo "<td>" . $attributes[1] . "</td>";
-                        echo "<td>" . $attributes[2] . "</td>";
-                        echo "<td>" . $attributes[3] . "</td>";
-                        echo "<td>" . $attributes[4] . "</td>";
-                        echo "<td>" . $attributes[5] . "</td>";
-                        echo "<td>" . $attributes[6] . "</td>";
-                        echo "<td>" . $attributes[7] . "</td>";
+                        echo "<td class='border-2'>" . $attributes[0] . "</td>";
+                        echo "<td class='border-2'>" . $attributes[1] . "</td>";
+                        echo "<td class='border-2'>" . $attributes[2] . "</td>";
+                        echo "<td class='border-2'>" . $attributes[3] . "</td>";
+                        echo "<td class='border-2'>" . $attributes[4] . "</td>";
+                        echo "<td class='border-2'>" . $attributes[5] . "</td>";
+                        echo "<td class='border-2'>" . $attributes[6] . "</td>";
+                        echo "<td class='border-2'>" . $attributes[7] . "</td>";
                         echo "</tr>";
                     }
                 }
