@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
 <!--        </ul>-->
 <!--    </nav>-->
     <!-- component -->
-    <nav class="bg-gray-200 shadow shadow-gray-300 w-100 px-8 md:px-auto">
+    <nav class=" shadow-lg shadow-gray-300 w-100 px-8 md:px-auto">
         <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
             <!-- Logo -->
             <div class="text-indigo-500 md:order-1">
@@ -94,16 +94,16 @@
                     </g>
                 </svg>
             </div>
-            <div class="text-gray-500 order-3 w-full md:w-auto md:order-2">
+            <div class=" order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between">
-                    <li class="md:px-4 md:py-2 text-indigo-500"><a href="postjobform.php">Post Job</a></li>
-                    <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="searchjobform.php">Search Job</a></li>
-                    <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="about.php">About Assignment</a></li>
+                    <li class="md:px-4 md:py-2 text-purple-600"><a href="postjobform.php">Post Job</a></li>
+                    <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="searchjobform.php">Search Job</a></li>
+                    <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="about.php">About Assignment</a></li>
                 </ul>
             </div>
             <div class="order-2 md:order-3">
                 <a href="index.php">
-                    <button class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
+                    <button class="bg-black px-4 py-2  text-gray-50 rounded-full flex items-center gap-2">
                         <i class="fas fa-home"></i>
                         <span>Home</span>
                     </button>
@@ -113,18 +113,18 @@
         </div>
     </nav>
     <div class="container mx-auto py-10 flex justify-center items-center ">
-        <div class="bg-yellow-100 p-3 md:p-10 rounded-md">
-            <h1 class="text-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Job Vacancy Posting System</h1>
+        <div class="bg-gray-50 bg-opacity-30 border border-black border-opacity-5 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
+            <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">Job Vacancy Posting System</h1>
 
-            <p>Name: Dang Nam Khanh</p>
-            <p>Student ID: 104225661</p>
-            <p>Email: <a href="">104225661@student.swin.edu.au</a></p>
+            <p><strong>Name:</strong> Dang Nam Khanh</p>
+            <p><strong>Student ID:</strong> 104225661</p>
+            <p><strong>Email:</strong> <a href="">104225661@student.swin.edu.au</a></p>
             <br>
             <p>I declare that this assignment is my individual work. I have not worked collaboratively nor have I copied
                 from any other student’s work or from any other source.</p>
-            <a href="postjobform.php" class="underline text-blue-700">Post a job vacancy</a>
-            <a href="searchjobform.php" class="underline">Search for a job vacancy</a>
-            <a href="about.php" class="underline">About this assignment</a>
+            <a href="postjobform.php" class="underline text-blue-700 block mt-3">Post a job vacancy <span class="text-xl ">&#x203A</span> </a>
+            <a href="searchjobform.php" class="underline text-blue-700 block mt-3">Search for a job vacancy <span class="text-xl">&#x203A</span> </a>
+            <a href="about.php" class="underline text-blue-700 block mt-3">About this assignment <span class="text-xl">&#x203A</span> </a>
 
         </div>
     </div>
