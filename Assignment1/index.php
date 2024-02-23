@@ -9,15 +9,6 @@
     <title>Document</title>
 </head>
 <body>
-<!--    <nav>-->
-<!--        <ul>-->
-<!--            <li><a href="index.php">Home</a></li>-->
-<!--            <li><a href="postjobform.php">Post job</a></li>-->
-<!--            <li><a href="searchjobform.php">Search job</a></li>-->
-<!--            <li><a href="about.php">About assignment</a></li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-    <!-- component -->
     <nav class=" shadow-lg shadow-gray-300 w-100 px-8 md:px-auto">
         <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
             <!-- Logo -->
@@ -96,7 +87,7 @@
             </div>
             <div class=" order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between">
-                    <li class="md:px-4 md:py-2 text-purple-600"><a href="postjobform.php">Post Job</a></li>
+                    <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="postjobform.php">Post Job</a></li>
                     <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="searchjobform.php">Search Job</a></li>
                     <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="about.php">About Assignment</a></li>
                 </ul>
@@ -113,7 +104,7 @@
         </div>
     </nav>
     <div class="container mx-auto py-10 flex justify-center items-center ">
-        <div class="bg-gray-50 bg-opacity-30 border border-black border-opacity-5 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
+        <div class="bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">Job Vacancy Posting System</h1>
 
             <p><strong>Name:</strong> Dang Nam Khanh</p>
@@ -122,9 +113,9 @@
             <br>
             <p>I declare that this assignment is my individual work. I have not worked collaboratively nor have I copied
                 from any other student’s work or from any other source.</p>
-            <a href="postjobform.php" class="underline text-blue-700 block mt-3">Post a job vacancy <span class="text-xl ">&#x203A</span> </a>
-            <a href="searchjobform.php" class="underline text-blue-700 block mt-3">Search for a job vacancy <span class="text-xl">&#x203A</span> </a>
-            <a href="about.php" class="underline text-blue-700 block mt-3">About this assignment <span class="text-xl">&#x203A</span> </a>
+            <a href="postjobform.php" class="underline text-blue-700 block mt-3 w-60">Post a job vacancy <span class="text-xl ">&#x203A</span> </a>
+            <a href="searchjobform.php" class="underline text-blue-700 block mt-3 w-60">Search for a job vacancy <span class="text-xl">&#x203A</span> </a>
+            <a href="about.php" class="underline text-blue-700 block mt-3 w-60">About this assignment <span class="text-xl">&#x203A</span> </a>
 
         </div>
     </div>
