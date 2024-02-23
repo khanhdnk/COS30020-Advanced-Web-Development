@@ -112,18 +112,21 @@
             </div>
         </div>
     </nav>
-    <div class="container mx-auto py-10">
-        <h1>Job Vacancy Posting System</h1>
+    <div class="container mx-auto py-10 flex justify-center items-center ">
+        <div class="bg-yellow-100 p-3 md:p-10 rounded-md">
+            <h1 class="text-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Job Vacancy Posting System</h1>
 
-        <p>Name: Dang Nam Khanh</p>
-        <p>Student ID: 104225661</p>
-        <p>Email: <a href="">104225661@student.swin.edu.au</a></p>
-        <br>
-        <p>I declare that this assignment is my individual work. I have not worked collaboratively nor have I copied
-            from any other student’s work or from any other source.</p>
-        <a href="postjobform.php" class="underline text-blue-700">Post a job vacancy</a>
-        <a href="searchjobform.php" class="underline">Search for a job vacancy</a>
-        <a href="about.php" class="underline">About this assignment</a>
+            <p>Name: Dang Nam Khanh</p>
+            <p>Student ID: 104225661</p>
+            <p>Email: <a href="">104225661@student.swin.edu.au</a></p>
+            <br>
+            <p>I declare that this assignment is my individual work. I have not worked collaboratively nor have I copied
+                from any other student’s work or from any other source.</p>
+            <a href="postjobform.php" class="underline text-blue-700">Post a job vacancy</a>
+            <a href="searchjobform.php" class="underline">Search for a job vacancy</a>
+            <a href="about.php" class="underline">About this assignment</a>
+
+        </div>
     </div>
     <?php
 
