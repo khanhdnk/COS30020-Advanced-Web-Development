@@ -122,6 +122,16 @@
                 }
             }
 
+            function compareClosingDates($a, $b) {
+                $closingDateA = strtotime($a[3]); // Assuming closing date is at index 3
+                $closingDateB = strtotime($b[3]); // Assuming closing date is at index 3
+
+                // Compare the closing dates
+                if ($closingDateA == $closingDateB) {
+                    return 0;
+                }
+                return ($closingDateA > $closingDateB) ? -1 : 1;
+            }
             function validateLocation($value)
             {
                 if ($value !== 'none') {
@@ -157,9 +167,21 @@
                         }
                     }
                     if (empty($result)) {
-                        echo "<p style='color: red'>No job posts found.</p>";
+                        echo "<p style='color: red' class='my-2'>No job posts found.</p>";
                     } else {
-                        for
+                        usort($result, 'compareClosingDates');
+                        foreach ($result as $job) {
+                            echo "<div class='bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-7 rounded-lg shadow-md m-4 transition transform duration-150 hover:bg-opacity-30 hover:-translate-y-1 hover:shadow-lg setminwidth'>";
+                            echo "<p class=' '><strong>Title: </strong>" . $job[0] . "</p>";
+                            echo "<p class=' '><strong>Position ID: </strong>" . $job[1] . "</p>";
+                            echo "<p class=''><strong>Description: </strong>" . $job[2] . "</p>";
+                            echo "<p class=' '><strong>Closing Date: </strong>" . $job[3] . "</p>";
+                            echo "<p class=' '><strong>Position: </strong>" . $job[4] . "</p>";
+                            echo "<p class=' '><strong>Contract: </strong>" . $job[5] . "</p>";
+                            echo "<p class=' '><strong>Application by: </strong>" . $job[6] . "</p>";
+                            echo "<p class=' '><strong>Location: </strong>" . $job[7] . "</p>";
+                            echo "</div>";
+                        }
                     }
 
                     echo "</div>";
@@ -171,8 +193,8 @@
                 echo "<p style='color: red'>Please provide the job title.</p>";
             }
             ?>
-            <a href="searchjobform.php" class="underline text-blue-700 block mt-3 w-60 ml-3 md:m-8">Search for another job vacancy <span class="text-xl ">&#x203A</span></a>
-            <a href="index.php" class="underline text-blue-700 block mt-3 w-60 ml-3 md:m-8">Return to Home Page <span class="text-xl ">&#x203A</span></a>
+            <a href="searchjobform.php" class="underline text-blue-700 block mt-3 w-60 ml-3 md:ml-0">Search for another job vacancy <span class="text-xl ">&#x203A</span></a>
+            <a href="index.php" class="underline text-blue-700 block mt-3 w-60 ml-3 md:ml-0">Return to Home Page <span class="text-xl ">&#x203A</span></a>
         </div>
     </div>
 

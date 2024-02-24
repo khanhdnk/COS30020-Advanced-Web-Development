@@ -11,3 +11,7 @@ html, body {
 .button{
 
 }
+
+.setminwidth{
+    min-width: 300px;
+}
