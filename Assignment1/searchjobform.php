@@ -138,7 +138,7 @@
                 <label for="mail">Mail</label>
                 <br>
                 <label for="location">Location:</label>
-                <select id="location" name="location" class="block  bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-2">
+                <select id="location" name="location" class="block  bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-2">
                     <option value="none">---</option>
                     <option value="act">ACT</option>
                     <option value="nsw">NSW</option>
@@ -150,11 +150,11 @@
                     <option value="wa">WA</option>
                 </select>
                 <input type="submit" value="Search"
-                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3 cursor-pointer">
                 <br>
 
             </form>
-            <a href="index.php">Return to Home Page</a>
+            <a href="index.php" class="underline text-blue-700 block mt-3 w-60">Return to Home Page <span class="text-xl ">&#x203A</span></a>
         </div>
     </div>
 </body>

@@ -157,14 +157,14 @@
                 <label for="location" class="block">Location:</label>
                 <select id="location" name="location" class="block  bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     <option value="none">---</option>
-                    <option value="act">ACT</option>
-                    <option value="nsw">NSW</option>
-                    <option value="nt">NT</option>
-                    <option value="qld">QLD</option>
-                    <option value="sa">SA</option>
-                    <option value="tas">TAS</option>
-                    <option value="vic">VIC</option>
-                    <option value="wa">WA</option>
+                    <option value="ACT">ACT</option>
+                    <option value="NSW">NSW</option>
+                    <option value="NT">NT</option>
+                    <option value="QLD">QLD</option>
+                    <option value="SA">SA</option>
+                    <option value="TAS">TAS</option>
+                    <option value="VIC">VIC</option>
+                    <option value="WA">WA</option>
                 </select>
 
 

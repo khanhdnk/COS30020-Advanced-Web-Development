@@ -152,7 +152,6 @@
                 while (($line = fgets($fileHandle)) !== false) {
                     $attributes = explode("\t", $line);
                     $existingPositionId = isset($attributes[1]) ? trim($attributes[1]) : null;
-                    echo $attributes[4];
 
                     if ($existingPositionId == $positionId) {
                         fclose($fileHandle);
@@ -221,7 +220,6 @@
                     }
                     echo"</ul>";
                 } else {
-                    echo "<p>this is just ok</p>";
                     if (isPositionIdUnique($_POST['positionID'], $filePath)) {
                         $record = "$title\t$positionID\t$description\t$closingDate\t$position\t$contract\t$application\t$location\n";
                         if (file_exists($filePath)) {
@@ -252,12 +250,8 @@
 
     <!--extra features:-->
     <!--    - sanitise input yes-->
-    <!--    - view detail? might not-->
-    <!--    - job view history? not yet-->
-    <!--    - job view count? not yet-->
-    <!--    - darkmode? no-->
-    <!--    - search with sensitive case? ok-->
-<!--    - Navbar -->
+<!--    - Navbar yes -->
+<!--    - sort by title, position ID, description-->
 </body>
 
 </html>
