@@ -121,12 +121,13 @@
 
             $filePath = '../../data/jobposts/jobs.txt';
             $errorMsg = array();
-            function validateInputField($name, $value, $pattern, $error)
+            function validateInputField($name, $value, $pattern, $error, &$errorMsg)
             {
                 if (!isset($value) || empty($value)) {
-                    echo "<p>Please provide the $name.</p>";
+//                    echo "<p>Please provide the $name.</p>";
+                    $errorMsg[] = "Please provide the $name.";
                 } else if (!preg_match($pattern, $value)) {
-                    echo $errorMsg[] = $error;
+                    $errorMsg[] = $error;
                 } else {
                     return $value;
                 }
@@ -155,6 +156,7 @@
 
                     if ($existingPositionId == $positionId) {
                         fclose($fileHandle);
+                        echo "same shit";
                         return false; // Position ID already exists
                     }
                 }
@@ -163,30 +165,33 @@
                 return true; // Position ID is unique
             }
 
-            function validateRadio($value, $error)
+            function validateRadio($value, $error, &$errorMsg)
             {
                 if (!isset($value) || empty($value)) {
-                    echo "<p>$error</p>";
+//                    echo "<p>$error</p>";
+                    $errorMsg[] = $error;
                 } else {
                     return $value;
                 }
                 return null;
             }
 
-            function validateCheckbox($value, $error)
+            function validateCheckbox($value, $error, &$errorMsg)
             {
                 if (!isset($value) || empty($value)) {
-                    echo "<p>$error</p>";
+//                    echo "<p>$error</p>";
+                    $errorMsg[] = $error;
                 } else {
                     return implode(', ', $value);
                 }
                 return null;
             }
 
-            function validateSelection($value, $error)
+            function validateSelection($value, $error, &$errorMsg)
             {
                 if ($value === 'none' || empty($value)) {
-                    echo "<p>$error</p>";
+//                    echo "<p>$error</p>";
+                    $errorMsg[] = $error;
                 } else {
                     return $value;
                 }
@@ -194,17 +199,27 @@
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $title = validateInputField('title', $_POST['title'], '/^[\p{L}0-9 ,.!]{1,20}$/u', 'Title must only contain letters (maximum 20 characters), numbers, and spaces.');
-                $positionID = validateInputField('position ID', $_POST['positionID'], '/^PID\d{4}$/', 'Position ID must be starts with "PID" and followed by 4 digits.');
-                $description = validateInputField('description', $_POST['description'], '/^.{1,250}$/', 'Description must only contain letters (maximum 250 characters), numbers, and spaces.');
-                $closingDate = validateInputField('closing date', $_POST['closingDate'], '/^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{2}$/', 'Closing date must be in the format "YYYY-MM-DD".');
-                $position = validateRadio(isset($_POST['position']) ? $_POST['position'] : '', 'Position must be selected.');
-                $contract = validateRadio(isset($_POST['contract']) ? $_POST['contract'] : '', 'Contract must be selected.');
-                $application = validateCheckbox(isset($_POST['application']) ? $_POST['application'] : '', 'Application by must be selected with at least 1 option.');
-                $location = validateSelection(isset($_POST['location']) ? $_POST['location'] : '', 'Location must be selected.');
+                $title = validateInputField('title', $_POST['title'], '/^[\p{L}0-9 ,.!]{1,20}$/u', 'Title must only contain letters (maximum 20 characters), numbers, and spaces.', $errorMsg);
+                $positionID = validateInputField('position ID', $_POST['positionID'], '/^PID\d{4}$/', 'Position ID must be starts with "PID" and followed by 4 digits.', $errorMsg);
+                $description = validateInputField('description', $_POST['description'], '/^.{1,250}$/', 'Description must only contain letters (maximum 250 characters), numbers, and spaces.', $errorMsg);
+                $closingDate = validateInputField('closing date', $_POST['closingDate'], '/^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{2}$/', 'Closing date must be in the format "YYYY-MM-DD".', $errorMsg);
+                $position = validateRadio(isset($_POST['position']) ? $_POST['position'] : '', 'Position must be selected.', $errorMsg);
+                $contract = validateRadio(isset($_POST['contract']) ? $_POST['contract'] : '', 'Contract must be selected.', $errorMsg);
+                $application = validateCheckbox(isset($_POST['application']) ? $_POST['application'] : '', 'Application by must be selected with at least 1 option.', $errorMsg);
+                $location = validateSelection(isset($_POST['location']) ? $_POST['location'] : '', 'Location must be selected.', $errorMsg);
+                if (isset($_POST['positionID'])){
 
+                }
                 if (!$title || !$positionID || !$description || !$closingDate || !$position || !$contract || !$application || !$location) {
-                    echo "<hr class='my-4 border border-black'> <p style='color: red'>You are not passing the validation. Please try again.</p>";
+                    echo "<p style='color: red'>You are not passing the validation. Please try again.</p><hr class='my-4 border border-black'>";
+                    if (!isPositionIdUnique($_POST['positionID'], $filePath)) {
+                        $errorMsg[] = "This position ID is not unique";
+                    }
+                    echo"<ul class=''>";
+                    foreach ($errorMsg as $msg) {
+                        echo "<li>$msg</li>";
+                    }
+                    echo"</ul>";
                 } else {
                     echo "<p>this is just ok</p>";
                     if (isPositionIdUnique($_POST['positionID'], $filePath)) {
@@ -220,7 +235,10 @@
                         echo "<p>This position ID is not unique</p>";
                     }
                 }
+            }else{
+                echo "<p style='color: red'>Please submit the job form</p>";
             }
+
 
 
             ?>
