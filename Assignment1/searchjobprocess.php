@@ -89,7 +89,7 @@
             </div>
             <div class=" order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between">
-                    <li class="md:px-4 md:py-2 text-purple-600"><a href="postjobform.php">Post Job</a></li>
+                    <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="postjobform.php">Post Job</a></li>
                     <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="searchjobform.php">Search Job</a></li>
                     <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="about.php">About Assignment</a></li>
                 </ul>
@@ -111,7 +111,14 @@
                 Job Vacancy Posting System</h1>
             <?php
             require 'sanitiseInput.php';
+
             $filePath = '../../data/jobposts/jobs.txt';
+
+            function convertToDate($date)
+            {
+                $date = explode('/', $date);
+                return strtotime("20" . $date[2] . '/' . $date[1] . '/' . $date[0]);
+            }
             function validateCheckbox($value)
             {
                 if (isset($value)) {
@@ -123,8 +130,8 @@
             }
 
             function compareClosingDates($a, $b) {
-                $closingDateA = strtotime($a[3]); // Assuming closing date is at index 3
-                $closingDateB = strtotime($b[3]); // Assuming closing date is at index 3
+                $closingDateA = convertToDate($a[3]); // Assuming closing date is at index 3
+                $closingDateB = convertToDate($b[3]); // Assuming closing date is at index 3
 
                 // Compare the closing dates
                 if ($closingDateA == $closingDateB) {
@@ -149,8 +156,7 @@
                 $location = isset($_GET['location']) ? validateLocation($_GET['location']) : false;
 
                 if (!file_exists($filePath)) {
-                    echo "<p style='color: red'>No job posts found.</p>";
-                    return;
+                    echo "<p style='color: red'>No job posts found (file doesn't exist).</p>";
                 } else {
                     $handle = fopen($filePath, 'r');
                     $result = array();
@@ -161,7 +167,9 @@
                             (!$position || strpos($attributes[4], $position) !== false) &&
                             (!$contract || strpos($attributes[5], $contract) !== false) &&
                             (!$application || strpos($attributes[6], $application) !== false) &&
-                            (!$location || strpos($attributes[7], $location) !== false)) {
+                            (!$location || strpos($attributes[7], $location) !== false) &&
+                            (convertToDate($attributes[3]) >= time()))
+                        {
                             $result[] = $attributes;
 
                         }

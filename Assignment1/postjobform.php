@@ -132,15 +132,15 @@
                 <br>
                 <span>Position:</span>
                 <input type="radio" name="position" id="fullTime" value="Full Time">
-                <label for="position">Full Time</label>
+                <label for="fullTime">Full Time</label>
 
                 <input type="radio" name="position" id="partTime" value="Part Time">
-                <label for="position">Part Time</label>
+                <label for="partTime">Part Time</label>
 
                 <br>
                 <span>Contract:</span>
                 <input type="radio" name="contract" id="Going" value="On-Going">
-                <label for="onGoing">On-going</label>
+                <label for="Going">On-going</label>
 
                 <input type="radio" name="contract" id="fixedTerm" value="Fixed term">
                 <label for="fixedTerm">Fixed Term</label>

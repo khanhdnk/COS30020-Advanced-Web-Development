@@ -155,7 +155,6 @@
 
                     if ($existingPositionId == $positionId) {
                         fclose($fileHandle);
-                        echo "same shit";
                         return false; // Position ID already exists
                     }
                 }
@@ -198,7 +197,7 @@
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $title = validateInputField('title', $_POST['title'], '/^[\p{L}0-9 ,.!]{1,20}$/u', 'Title must only contain letters (maximum 20 characters), numbers, and spaces.', $errorMsg);
+                $title = validateInputField('title', $_POST['title'], '/^[\p{L}0-9 ,.!]{1,20}$/u', 'Title must only contain letters (maximum 20 characters), numbers, comma, period (full stop), exclamation point, and spaces.', $errorMsg);
                 $positionID = validateInputField('position ID', $_POST['positionID'], '/^PID\d{4}$/', 'Position ID must be starts with "PID" and followed by 4 digits.', $errorMsg);
                 $description = validateInputField('description', $_POST['description'], '/^.{1,250}$/', 'Description must only contain letters (maximum 250 characters), numbers, and spaces.', $errorMsg);
                 $closingDate = validateInputField('closing date', $_POST['closingDate'], '/^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{2}$/', 'Closing date must be in the format "DD-MM-YY".', $errorMsg);
@@ -206,19 +205,17 @@
                 $contract = validateRadio(isset($_POST['contract']) ? $_POST['contract'] : '', 'Contract must be selected.', $errorMsg);
                 $application = validateCheckbox(isset($_POST['application']) ? $_POST['application'] : '', 'Application by must be selected with at least 1 option.', $errorMsg);
                 $location = validateSelection(isset($_POST['location']) ? $_POST['location'] : '', 'Location must be selected.', $errorMsg);
-                if (isset($_POST['positionID'])){
 
-                }
                 if (!$title || !$positionID || !$description || !$closingDate || !$position || !$contract || !$application || !$location) {
                     echo "<p style='color: red'>You are not passing the validation. Please try again.</p><hr class='my-4 border border-black'>";
                     if (!isPositionIdUnique($_POST['positionID'], $filePath)) {
                         $errorMsg[] = "This position ID is not unique";
                     }
-                    echo"<ul class=''>";
+                    echo "<ul class=''>";
                     foreach ($errorMsg as $msg) {
-                        echo "<li>$msg</li>";
+                        echo "<li class='my-2'>$msg</li>";
                     }
-                    echo"</ul>";
+                    echo "</ul>";
                 } else {
                     if (isPositionIdUnique($_POST['positionID'], $filePath)) {
                         $record = "$title\t$positionID\t$description\t$closingDate\t$position\t$contract\t$application\t$location\n";
@@ -230,19 +227,20 @@
                         echo "<p style='color: green;'>Job has been posted successfully.</p>";
 
                     } else {
-                        echo "<p>This position ID is not unique</p>";
+                        echo "<p class='text-red-500'>This position ID is not unique, please provide another one.</p>";
                     }
                 }
-            }else{
+            } else {
                 echo "<p style='color: red'>Please submit the job form</p>";
             }
 
 
-
             ?>
             <div class="lastnote">
-                <p class="return underline text-blue-700 block mt-3 w-60"><a href="postjobform.php"><span>Back to Job Posting Page </span><span class="text-xl ">&#x203A</span></a></p>
-                <p class="return underline text-blue-700 block mt-3 w-60"><a href="index.php"><span>Back to Home</span> <span class="text-xl ">&#x203A</span></a></p>
+                <p class="return underline text-blue-700 block mt-3 w-60"><a href="postjobform.php"><span>Back to Job Posting Page </span><span
+                                class="text-xl ">&#x203A</span></a></p>
+                <p class="return underline text-blue-700 block mt-3 w-60"><a href="index.php"><span>Back to Home</span>
+                        <span class="text-xl ">&#x203A</span></a></p>
             </div>
         </div>
     </div>
@@ -250,8 +248,8 @@
 
     <!--extra features:-->
     <!--    - sanitise input yes-->
-<!--    - Navbar yes -->
-<!--    - sort by title, position ID, description-->
+    <!--    - Navbar yes -->
+    <!--    - sort by title, position ID, description-->
 </body>
 
 </html>
