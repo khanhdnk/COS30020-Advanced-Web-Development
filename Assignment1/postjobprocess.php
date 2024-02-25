@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Post a Job</title>
 </head>
 
 <body>
@@ -89,7 +89,7 @@
             </div>
             <div class=" order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between">
-                    <li class="md:px-4 md:py-2 text-purple-600"><a href="postjobform.php">Post Job</a></li>
+                    <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="postjobform.php">Post Job</a></li>
                     <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="searchjobform.php">Search Job</a></li>
                     <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="about.php">About Assignment</a></li>
                 </ul>

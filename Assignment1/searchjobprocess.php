@@ -5,10 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Job Vacancy Information</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <title>Job Vacancy Information</title>
 </head>
 <body>
     <nav class=" shadow-lg shadow-gray-300 w-100 px-8 md:px-auto">
@@ -108,7 +108,7 @@
     <div class="container mx-auto py-10 flex justify-center items-center ">
         <div class="px-2 md:px-4">
             <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">
-                Job Vacancy Posting System</h1>
+                Job Vacancy Information</h1>
             <?php
             require 'sanitiseInput.php';
 

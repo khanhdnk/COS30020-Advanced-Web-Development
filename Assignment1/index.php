@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Home</title>
 </head>
 <body>
     <nav class=" shadow-lg shadow-gray-300 w-100 px-8 md:px-auto">
