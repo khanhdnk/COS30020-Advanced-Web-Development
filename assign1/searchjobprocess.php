@@ -117,7 +117,7 @@
             function convertToDate($date)
             {
                 $date = explode('/', $date);
-                return strtotime("20" . $date[2] . '/' . $date[1] . '/' . $date[0]);
+                return strtotime('20' . $date[2] . '/' . $date[1] . '/' . $date[0]);
             }
             function validateCheckbox($value)
             {
@@ -168,7 +168,7 @@
                             (!$contract || strpos($attributes[5], $contract) !== false) &&
                             (!$application || strpos($attributes[6], $application) !== false) &&
                             (!$location || strpos($attributes[7], $location) !== false) &&
-                            (convertToDate($attributes[3]) >= time()))
+                            (convertToDate($attributes[3]) >= strtotime(date('Y/m/d'))))
                         {
                             $result[] = $attributes;
 
@@ -208,4 +208,3 @@
 
 </body>
 </html>
-                            

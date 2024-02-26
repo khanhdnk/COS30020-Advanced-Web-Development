@@ -87,6 +87,7 @@
                     </g>
                 </svg>
             </div>
+            <!-- Navigation -->
             <div class=" order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between">
                     <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="postjobform.php">Post Job</a></li>
@@ -105,10 +106,12 @@
             </div>
         </div>
     </nav>
+
     <div class="container mx-auto py-10 flex justify-center items-center ">
         <div class="bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">
                 About this assignment</h1>
+<!--            answers to the requirements of the assignment-->
             <p class="text-lg"><strong>Req 1:</strong></p>
             <ul class="list-disc md:ml-5 ml-3">
                 <?php
@@ -125,6 +128,7 @@
                 </li>
 
             </ul>
+<!--            figure 1 and figure 2 are the screenshots of the discussion page-->
             <p class="text-lg"><strong>Req 2:</strong></p>
             <figure class="my-5">
                 <img src="style/discussion1.png" alt="discussion1" class="">

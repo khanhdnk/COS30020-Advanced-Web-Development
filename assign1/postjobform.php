@@ -87,6 +87,7 @@
                     </g>
                 </svg>
             </div>
+            <!-- Menu -->
             <div class=" order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between">
                     <li class="md:px-4 md:py-2 text-purple-600"><a href="postjobform.php">Post Job</a></li>
@@ -110,7 +111,7 @@
         <div class="bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">
                 Job Vacancy Posting System</h1>
-
+<!--            form to post job-->
             <form action="postjobprocess.php" method="POST">
                 <p>	&#42 All fields are required.</p>
                 <br>
@@ -174,11 +175,8 @@
                     <span>&rarr;</span>
                 </button>
                 <button type="reset" class="px-4 py-2 font-bold text-blue-500 border border-blue-500 rounded hover:bg-red-500 hover:text-white hover:border-red-500">Reset</button>
-
                 <br>
                 <a href="index.php" class="underline text-blue-700 block mt-3 w-60">Return to Homepage <span class="text-xl ">&#x203A</span> </a>
-
-
             </form>
         </div>
 

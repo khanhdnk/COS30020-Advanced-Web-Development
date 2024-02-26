@@ -85,6 +85,7 @@
                     </g>
                 </svg>
             </div>
+            <!-- Menu -->
             <div class=" order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between">
                     <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="postjobform.php">Post Job</a></li>
@@ -106,7 +107,7 @@
     <div class="container mx-auto py-10 flex justify-center items-center ">
         <div class="bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">Job Vacancy Posting System</h1>
-
+<!--            student's information-->
             <p><strong>Name:</strong> Dang Nam Khanh</p>
             <p><strong>Student ID:</strong> 104225661</p>
             <p><strong>Email:</strong> <a href="">104225661@student.swin.edu.au</a></p>
@@ -119,8 +120,5 @@
 
         </div>
     </div>
-    <?php
-
-    ?>
 </body>
 </html>

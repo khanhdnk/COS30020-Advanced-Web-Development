@@ -87,6 +87,7 @@
                     </g>
                 </svg>
             </div>
+            <!-- Menu -->
             <div class=" order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between">
                     <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="postjobform.php">Post Job</a></li>
@@ -111,6 +112,7 @@
         <div class="bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">
                 Job Vacancy Posting System</h1>
+
             <?php
             umask(0007);
             $dir = "../../data/jobposts";
@@ -124,7 +126,6 @@
             function validateInputField($name, $value, $pattern, $error, &$errorMsg)
             {
                 if (!isset($value) || empty($value)) {
-//                    echo "<p>Please provide the $name.</p>";
                     $errorMsg[] = "Please provide the $name.";
                 } else if (!preg_match($pattern, $value)) {
                     $errorMsg[] = $error;
@@ -138,7 +139,6 @@
             {
                 // If the file doesn't exist, we can assume the position ID is unique
                 if (!file_exists($pathToFile)) {
-                    echo "file does not exist";
                     return true;
                 }
 
@@ -166,7 +166,6 @@
             function validateRadio($value, $error, &$errorMsg)
             {
                 if (!isset($value) || empty($value)) {
-//                    echo "<p>$error</p>";
                     $errorMsg[] = $error;
                 } else {
                     return $value;
@@ -177,7 +176,6 @@
             function validateCheckbox($value, $error, &$errorMsg)
             {
                 if (!isset($value) || empty($value)) {
-//                    echo "<p>$error</p>";
                     $errorMsg[] = $error;
                 } else {
                     return implode(', ', $value);
@@ -188,7 +186,6 @@
             function validateSelection($value, $error, &$errorMsg)
             {
                 if ($value === 'none' || empty($value)) {
-//                    echo "<p>$error</p>";
                     $errorMsg[] = $error;
                 } else {
                     return $value;
@@ -197,6 +194,7 @@
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                //validate fields
                 $title = validateInputField('title', $_POST['title'], '/^[\p{L}0-9 ,.!]{1,20}$/u', 'Title must only contain letters (maximum 20 characters), numbers, comma, period (full stop), exclamation point, and spaces.', $errorMsg);
                 $positionID = validateInputField('position ID', $_POST['positionID'], '/^PID\d{4}$/', 'Position ID must be starts with "PID" and followed by 4 digits.', $errorMsg);
                 $description = validateInputField('description', $_POST['description'], '/^.{1,250}$/', 'Description must only contain letters (maximum 250 characters), numbers, and spaces.', $errorMsg);
@@ -236,6 +234,8 @@
 
 
             ?>
+<!--            links-->
+
             <div class="lastnote">
                 <p class="return underline text-blue-700 block mt-3 w-60"><a href="postjobform.php"><span>Back to Job Posting Page </span><span
                                 class="text-xl ">&#x203A</span></a></p>
@@ -244,12 +244,6 @@
             </div>
         </div>
     </div>
-
-
-    <!--extra features:-->
-    <!--    - sanitise input yes-->
-    <!--    - Navbar yes -->
-    <!--    - sort by title, position ID, description-->
 </body>
 
 </html>
