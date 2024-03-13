@@ -12,8 +12,7 @@
     <?php
     require_once("settings.php");
     // complete your answer based on Lecture 8 slides 26 and 44
-    $conn = @mysqli_connect($host, $user, $pswd)
-    or die('Failed to connect to server');
+    $conn = @mysqli_connect($host, $user, $pswd);
     // Use database
     @mysqli_select_db($conn, 's104225661_db')
     or die('Database not available');
