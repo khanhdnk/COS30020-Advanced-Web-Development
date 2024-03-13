@@ -29,7 +29,7 @@
     echo "</table>";
 
     // free result and close connection
-    mysqli_free_result($results);
+    mysqli_free_result($result);
     mysqli_close($conn);
     ?>
 </body>
