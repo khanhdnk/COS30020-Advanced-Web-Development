@@ -88,8 +88,8 @@
             <!-- Menu -->
             <div class=" order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between">
-                    <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="postjobform.php">Sign up</a></li>
-                    <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="searchjobform.php">Login</a></li>
+                    <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="signup.php">Sign up</a></li>
+                    <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="login.php">Login</a></li>
                     <li class="md:px-4 md:py-2 hover:text-gray-400"><a href="about.php">About</a></li>
                 </ul>
             </div>
@@ -123,7 +123,7 @@
             if (!$conn) {
                 echo "<p>Database connection failure</p>";
             } else {
-                $sql = "CREATE TABLE IF NOT EXISTS friends (
+                $sql_create_first_table = "CREATE TABLE IF NOT EXISTS friends (
                     friend_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     friend_email VARCHAR(50) NOT NULL,
                     password VARCHAR(20) NOT NULL,
@@ -131,12 +131,67 @@
                     date_started DATE NOT NULL,
                     num_of_friends INT UNSIGNED
                 );";
-                $query = mysqli_query($conn, $sql);
-                if ($query) {
-                    echo "<p>Database created successfully</p>";
+
+                $result1 = mysqli_query($conn, $sql_create_first_table);
+                if ($result1) {
+                    echo "<p>Table 'friends' created successfully</p>";
                 } else {
-                    echo "<p>Database creation failure</p>";
+                    echo "<p>Table 'friends' creation failure." .  mysqli_error($conn) . "</p>";
                 }
+
+
+                $sql_create_second_table = "CREATE TABLE IF NOT EXISTS myfriends (
+                    friend_id1 INT NOT NULL,
+                    friend_id2 INT NOT NULL,
+                );";
+
+
+                $result2 = mysqli_query($conn, $sql_create_second_table);
+                if ($result2) {
+                    echo "<p>Table 'myfriends' created successfully</p>";
+                } else {
+                    echo "<p>Table 'myfriends' creation failure." .  mysqli_error($conn) . "</p>";
+                }
+
+
+                $query_first_table = "SELECT * FROM friends";
+                $result3 = mysqli_query($conn, $query_first_table);
+                if ($result3) {
+                    if (mysqli_num_rows($result3) > 0){
+                        echo "<p>Table 'friends' has records</p>";
+                    }
+                    else {
+                        $sql_add_friends = "INSERT INTO friends (friend_email, password, profile_name, date_started, num_of_friends) VALUES
+                            ('john@example.com', 'password123', 'John Doe', '2023-01-15', 25),
+                            ('alice@example.com', 'alicepass', 'Alice Smith', '2023-02-28', 30),
+                            ('bob@example.com', 'bobpassword', 'Bob Johnson', '2023-03-10', 20),
+                            ('emily@example.com', 'emilypass', 'Emily Brown', '2023-04-05', 15),
+                            ('chris@example.com', 'chrispass', 'Chris Wilson', '2023-05-20', 18),
+                            ('sarah@example.com', 'sarahpass', 'Sarah Davis', '2023-06-11', 22),
+                            ('michael@example.com', 'michaelpass', 'Michael Taylor', '2023-07-03', 27),
+                            ('lisa@example.com', 'lisapass', 'Lisa Martinez', '2023-08-18', 35),
+                            ('david@example.com', 'davidpass', 'David Anderson', '2023-09-22', 19),
+                            ('jennifer@example.com', 'jenniferpass', 'Jennifer Rodriguez', '2023-10-09', 24);
+                            ";
+                        $result4 = mysqli_query($conn, $sql_add_friends);
+                        if ($result4) {
+                            echo "<p>Records added to 'friends' table successfully</p>";
+                        } else {
+                            echo "<p>Records addition to 'friends' table failure." . mysqli_error($conn) . "</p>";
+                        }
+                    }
+                }
+
+                $query_second_table = "SELECT * FROM myfriends";
+                $result5 = mysqli_query($conn, $query_second_table);
+                if ($result5){
+                    if (mysqli_num_rows($result5) > 0){
+                        echo "<p>Table 'myfriends' has records</p>";
+                    }
+                }
+
+
+
                 mysqli_close($conn);
             }
 
