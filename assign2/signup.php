@@ -1,85 +1,7 @@
 <?php
 require_once("ultilities/validate_field.php");
 require_once("settings.php");
-
 session_start();
-if ("METHOD" == "POST") {
-    $errmsg = array();
-    $email = validate_field($_POST['email'], '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$', $errmsg, "Invalid email format", "email");
-    $profile_name = validate_field($_POST['profile_name'], '^[a-zA-Z]+$', $errmsg, "Profile must contain only letters and cannot be blank", "profile name");
-    $password = validate_field($_POST['password'], '^[a-zA-Z0-9]+$', $errmsg, "Password must contain only letters and numbers and cannot be blank", "password");
-    $confirm_password = validate_field($_POST['confirm_password'], '^[a-zA-Z0-9]+$', $errmsg, "Password must contain only letters and numbers and cannot be blank", "confirm password");
-    if ($email && $profile_name && $password && $confirm_password) {
-        if ($password == $confirm_password) {
-            $conn = @mysqli_connect($host, $user, $pswd);
-            if ($conn === false) {
-                die("Error: Unable to connect. " . mysqli_connect_error());
-            }
-
-            if (!@mysqli_select_db($conn, $dbnm)) {
-                die("Error: Unable to select database. " . mysqli_error($conn));
-            }
-            // or die('Database not available');
-            if (!$conn) {
-                echo "<p>Database connection failure</p>";
-            } else {
-                $registing_query = "INSERT INTO friends (friend_email, password, profile_name, date_started, num_of_friends) VALUES ('$email', '$password', '$profile_name', CURDATE(), 0)";
-                $result = mysqli_query($conn, $registing_query);
-                if (mysqli_num_rows($result) > 0) {
-                    echo "<p>Registration successful</p>";
-                } else {
-                    echo "<p>Registration failed</p>";
-                }
-            }
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // $email = $_POST['email'];
-    // $profilename = $_POST['profilename'];
-    // $password = $_POST['password'];
-    // $confirmpassword = $_POST['confirmpassword'];
-
-    // if ($password == $confirmpassword) {
-    //     $password = password_hash($password, PASSWORD_DEFAULT);
-    //     $conn = new mysqli("localhost", "root", "", "myfriend");
-    //     $sql = "INSERT INTO users (email, profilename, password) VALUES ('$email', '$profilename', '$password')";
-    //     if ($conn->query($sql) === TRUE) {
-    //         echo "New record created successfully";
-    //     } else {
-    //         echo "Error: " . $sql . "<br>" . $conn->error;
-    //     }
-    //     $conn->close();
-    // } else {
-    //     echo "Password and Confirm Password do not match";
-    // }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -215,6 +137,86 @@ if ("METHOD" == "POST") {
                 <button type="reset" class="w-full bg-red-500 text-gray-50 p-2 rounded-lg mt-4">Clear</button>
 
                 <a href="index.php">Home</a>
+                <?php
+                if ("METHOD" == "POST") {
+                    $errmsg = array();
+                    $email = validate_field($_POST['email'], '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$', $errmsg, "Invalid email format", "email");
+                    $profile_name = validate_field($_POST['profile_name'], '^[a-zA-Z]+$', $errmsg, "Profile must contain only letters and cannot be blank", "profile name");
+                    $password = validate_field($_POST['password'], '^[a-zA-Z0-9]+$', $errmsg, "Password must contain only letters and numbers and cannot be blank", "password");
+                    $confirm_password = validate_field($_POST['confirm_password'], '^[a-zA-Z0-9]+$', $errmsg, "Password must contain only letters and numbers and cannot be blank", "confirm password");
+                    if ($email && $profile_name && $password && $confirm_password) {
+                        if ($password == $confirm_password) {
+                            $conn = @mysqli_connect($host, $user, $pswd);
+                            if ($conn === false) {
+                                die("Error: Unable to connect. " . mysqli_connect_error());
+                            }
+
+                            if (!@mysqli_select_db($conn, $dbnm)) {
+                                die("Error: Unable to select database. " . mysqli_error($conn));
+                            }
+                            // or die('Database not available');
+                            if (!$conn) {
+                                echo "<p>Database connection failure</p>";
+                            } else {
+                                $registing_query = "INSERT INTO friends (friend_email, password, profile_name, date_started, num_of_friends) VALUES ('$email', '$password', '$profile_name', CURDATE(), 0)";
+                                $result = mysqli_query($conn, $registing_query);
+                                if ($result) {
+                                    echo "<p>Registration successful</p>";
+                                    $_SESSION['authenticated'] = true;
+                                    header("location: friendadd.php");
+                                } else {
+                                    $errmsg[] = "<p>Registration failed</p>";
+                                }
+                            }
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    // $email = $_POST['email'];
+                    // $profilename = $_POST['profilename'];
+                    // $password = $_POST['password'];
+                    // $confirmpassword = $_POST['confirmpassword'];
+                
+                    // if ($password == $confirmpassword) {
+                    //     $password = password_hash($password, PASSWORD_DEFAULT);
+                    //     $conn = new mysqli("localhost", "root", "", "myfriend");
+                    //     $sql = "INSERT INTO users (email, profilename, password) VALUES ('$email', '$profilename', '$password')";
+                    //     if ($conn->query($sql) === TRUE) {
+                    //         echo "New record created successfully";
+                    //     } else {
+                    //         echo "Error: " . $sql . "<br>" . $conn->error;
+                    //     }
+                    //     $conn->close();
+                    // } else {
+                    //     echo "Password and Confirm Password do not match";
+                    // }
+                }
+                ?>
             </form>
         </div>
     </div>
