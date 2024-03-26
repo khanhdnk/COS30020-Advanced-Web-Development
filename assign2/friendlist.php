@@ -7,6 +7,13 @@ if ($_SESSION['authenticated'] == false) {
 }
 
 $notification = array();
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['friendID']) && !empty($_POST['friendID'])) {
+        $the_other_friend_id = $_POST['friendID'];
+        unfriend($the_other_friend_id);
+        header("Location: friendlist.php");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +75,12 @@ $notification = array();
                     foreach( $result2 as $friend){
                         echo "<tr>";
                         echo "<td>{$friend['profile_name']}</td>";
-                        echo "<td><a href='friendprofile.php?friend_id={$friend['friend_id']}'>Unfriend</a></td>";
+                        echo "<td>
+                                <form method='POST' action='friendlist.php'>
+                                <input type='hidden' name='friendId' value='{$friend['friend_id']}'>
+                                <input class='btn btn-outline-info' type='submit' name='addfriend' value='Unfriend'>
+                                </form>                       
+                            </td>";
                         echo "</tr>";
                     }
                     echo "</table>";
