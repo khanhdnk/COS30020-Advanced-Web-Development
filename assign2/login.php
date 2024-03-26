@@ -68,7 +68,7 @@ require_once("settings.php");
                                     $_SESSION['authenticated'] = true;
                                     $_SESSION['email'] = $row['friend_email'];
                                     $_SESSION['friend_id'] = $row['friend_id'];
-                                    header("Location: index.php");
+                                    header("Location: friendlist.php");
                                     exit();
                                 } else {
                                     $errmsg[] = "<p style='color: red'>Password is incorrect.</p>";

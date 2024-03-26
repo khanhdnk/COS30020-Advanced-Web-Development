@@ -33,7 +33,7 @@ $notification = array();
             if (!@mysqli_select_db($conn, $dbnm)) {
                 die("Error: Unable to select database. " . mysqli_error($conn));
             }
-            $sql = "SELECT * FROM friends WHERE email = '{$_SESSION['email']}'"; 
+            $sql = "SELECT * FROM friends WHERE friend_email = '{$_SESSION['email']}'"; 
             $result = mysqli_query($conn, $sql);
 
             $row = mysqli_fetch_assoc($result);
@@ -68,7 +68,7 @@ $notification = array();
                     foreach( $result2 as $friend){
                         echo "<tr>";
                         echo "<td>{$friend['profile_name']}</td>";
-                        echo "<td><a href='friendprofile.php?friend_id={$friend['friend_id']}'>Add as friend</a></td>";
+                        echo "<td><a href='friendprofile.php?friend_id={$friend['friend_id']}'>Unfriend</a></td>";
                         echo "</tr>";
                     }
                     echo "</table>";

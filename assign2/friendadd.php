@@ -7,6 +7,14 @@ if ($_SESSION['authenticated'] == false) {
 }
 $notification = array();
 
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['friendID']) && !empty($_POST['friendID'])) {
+        $the_other_friend_id = $_POST['friendID'];
+        add_friend_feature($the_other_friend_id);
+        header("Location: friendlist.php");
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +42,7 @@ $notification = array();
             if (!@mysqli_select_db($conn, $dbnm)) {
                 die("Error: Unable to select database. " . mysqli_error($conn));
             }
-            $sql = "SELECT * FROM friends WHERE email = '{$_SESSION['email']}'";
+            $sql = "SELECT * FROM friends WHERE friend_email = '{$_SESSION['email']}'";
             $result = mysqli_query($conn, $sql);
 
             $row = mysqli_fetch_assoc($result);
@@ -58,7 +66,7 @@ $notification = array();
             function add_friend_feature($friend_id)
             {
                 global $conn;
-                $sql = "DELETE FROM myfriends WHERE (friend_id1 = {$_SESSION['friend_id']} AND friend_id2 = {$friend_id}) OR (friend_id1 = {$friend_id} AND friend_id2 = {$_SESSION['friend_id']})";
+                $sql = "INSERT INTO myfriends (friend_id1, friend_id2) VALUES ({$_SESSION['friend_id']}, {$friend_id})";
                 $unfriend_result = mysqli_query($conn, $sql);
                 if ($unfriend_result) {
                     $notification[] = "<p>Unfriend successfully</p>";
