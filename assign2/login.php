@@ -59,7 +59,7 @@ require_once("settings.php");
                         if (!$conn) {
                             echo "<p>Database connection failure</p>";
                         } else {
-                            $registing_query = "SELECT friend_email, password FROM friends WHERE friend_email = '$email'";
+                            $registing_query = "SELECT friend_id, friend_email, password FROM friends WHERE friend_email = '$email'";
                             $result = mysqli_query($conn, $registing_query);
                             if (mysqli_num_rows($result) > 0) {
                                 $row = mysqli_fetch_assoc($result);

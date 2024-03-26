@@ -7,13 +7,7 @@ if ($_SESSION['authenticated'] == false) {
 }
 $notification = array();
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['friendID']) && !empty($_POST['friendID'])) {
-        $the_other_friend_id = $_POST['friendID'];
-        add_friend_feature($the_other_friend_id);
-        header("Location: friendlist.php");
-    }
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -42,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (!@mysqli_select_db($conn, $dbnm)) {
                 die("Error: Unable to select database. " . mysqli_error($conn));
             }
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                if (isset($_POST['friendId']) && !empty($_POST['friendId'])) {
+                    $the_other_friend_id = $_POST['friendId'];
+                    add_friend_feature($the_other_friend_id, $notification);
+                }
+            }
             $sql = "SELECT * FROM friends WHERE friend_email = '{$_SESSION['email']}'";
             $result = mysqli_query($conn, $sql);
 
@@ -63,11 +63,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             //excute query
             $not_friend_result = mysqli_query($conn, $get_not_friends);
 
-            function add_friend_feature($friend_id)
+            function add_friend_feature($friend_id, &$notification)
             {
                 global $conn;
                 $sql = "INSERT INTO myfriends (friend_id1, friend_id2) VALUES ({$_SESSION['friend_id']}, {$friend_id})";
                 $unfriend_result = mysqli_query($conn, $sql);
+                if (!$unfriend_result) {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
                 if ($unfriend_result) {
                     $notification[] = "<p>Unfriend successfully</p>";
                 } else {
@@ -102,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
 
             ?>
-            <a href="addfriend.php">Add Friend</a>
+            <a href="friendlist.php">Friend List</a>
             <a href="logout.php">Logout</a>
         </div>
     </div>

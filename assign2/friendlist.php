@@ -7,13 +7,7 @@ if ($_SESSION['authenticated'] == false) {
 }
 
 $notification = array();
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['friendID']) && !empty($_POST['friendID'])) {
-        $the_other_friend_id = $_POST['friendID'];
-        unfriend($the_other_friend_id);
-        header("Location: friendlist.php");
-    }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (!@mysqli_select_db($conn, $dbnm)) {
                 die("Error: Unable to select database. " . mysqli_error($conn));
             }
+
+            if (isset($_POST['friendId'])) {
+                $the_other_friend_id = $_POST['friendId'];
+                unfriend($the_other_friend_id, $notification, $conn);
+            }
             $sql = "SELECT * FROM friends WHERE friend_email = '{$_SESSION['email']}'"; 
             $result = mysqli_query($conn, $sql);
 
@@ -53,10 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $result2 = mysqli_query($conn, $get_friends);
             $number_of_friends = mysqli_num_rows($result2);
 
-            function unfriend($friend_id){
-                global $conn;
-                $sql = "DELETE FROM myfriends WHERE (friend_id1 = {$_SESSION['friend_id']} AND friend_id2 = {$friend_id}) OR (friend_id1 = {$friend_id} AND friend_id2 = {$_SESSION['friend_id']})";
-                $unfriend_result = mysqli_query($conn, $sql);
+            function unfriend($friend_id, &$notification, &$connect){
+                $sqli = "DELETE FROM myfriends WHERE (friend_id1 = {$_SESSION['friend_id']} AND friend_id2 = {$friend_id}) OR (friend_id1 = {$friend_id} AND friend_id2 = {$_SESSION['friend_id']})";
+                $unfriend_result = mysqli_query($connect, $sqli);
+                //echo error query
+                if (!$unfriend_result) {
+                    echo "Error: " . $sqli . "<br>" . mysqli_error($connect);
+                }
                 if ($unfriend_result) {
                     $notification[] =  "<p>Unfriend successfully</p>";
                 }else{
@@ -76,10 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         echo "<tr>";
                         echo "<td>{$friend['profile_name']}</td>";
                         echo "<td>
-                                <form method='POST' action='friendlist.php'>
+                                <form method='post' action='friendlist.php'>
                                 <input type='hidden' name='friendId' value='{$friend['friend_id']}'>
+                                
                                 <input class='btn btn-outline-info' type='submit' name='addfriend' value='Unfriend'>
-                                </form>                       
+                                </form>
+                                {$friend['friend_id'] }                      
                             </td>";
                         echo "</tr>";
                     }
@@ -91,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 foreach($notification as $noti){
                     echo "<p>$noti</p>";   
                 }
+                mysqli_close($conn);
             ?>
             
             <a href="friendadd.php">Add Friend</a>
