@@ -67,6 +67,7 @@ require_once("settings.php");
                                     echo "<p>Login successfull</p>";
                                     $_SESSION['authenticated'] = true;
                                     $_SESSION['email'] = $row['friend_email'];
+                                    $_SESSION['friend_id'] = $row['friend_id'];
                                     header("Location: index.php");
                                     exit();
                                 } else {

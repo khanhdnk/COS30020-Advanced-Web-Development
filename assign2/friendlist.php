@@ -6,6 +6,7 @@ if ($_SESSION['authenticated'] == false) {
     header("Location: login.php");
 }
 
+$notification = array();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,15 +35,54 @@ if ($_SESSION['authenticated'] == false) {
             }
             $sql = "SELECT * FROM friends WHERE email = '{$_SESSION['email']}'"; 
             $result = mysqli_query($conn, $sql);
+
             $row = mysqli_fetch_assoc($result);
             $profile_name = $row['profile_name'];
             $get_friends = "SELECT f.friend_id, f.profile_name
-            FROM friends f JOIN my_friends mf 
+            FROM friends f JOIN myfriends mf
             ON f.friend_id = mf.friend_id1 OR f.friend_id = mf.friend_id2
-            WHERE (mf.friend_id1 = {$row['']} OR mf.friend_id2 = ?) 
-            AND f.friend_id != ?";
+            WHERE (mf.friend_id1 = {$row['friend_id']} OR mf.friend_id2 = {$row['friend_id']}) 
+            AND f.friend_id != {$row['friend_id']}";
+            $result2 = mysqli_query($conn, $get_friends);
+            $number_of_friends = mysqli_num_rows($result2);
+
+            function unfriend($friend_id){
+                global $conn;
+                $sql = "DELETE FROM myfriends WHERE (friend_id1 = {$_SESSION['friend_id']} AND friend_id2 = {$friend_id}) OR (friend_id1 = {$friend_id} AND friend_id2 = {$_SESSION['friend_id']})";
+                $unfriend_result = mysqli_query($conn, $sql);
+                if ($unfriend_result) {
+                    $notification[] =  "<p>Unfriend successfully</p>";
+                }else{
+                    $notification[] =  "<p>Unfriend failed</p>";
+                }
+            }
+
                 
             ?>
+            <h1 class="font-bold"><?php echo "$profile_name"?>'s Friend List Page</h1>
+            <h1>Total number of friends is <?php echo $number_of_friends?></h1>
+            <?php
+                if ($number_of_friends > 0) {
+                    echo "<table>";
+                    echo "<table>";
+                    foreach( $result2 as $friend){
+                        echo "<tr>";
+                        echo "<td>{$friend['profile_name']}</td>";
+                        echo "<td><a href='friendprofile.php?friend_id={$friend['friend_id']}'>Add as friend</a></td>";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                }else{
+                    echo "<p>You don't have any friend</p> ";
+
+                }
+                foreach($notification as $noti){
+                    echo "<p>$noti</p>";   
+                }
+            ?>
+            
+            <a href="friendadd.php">Add Friend</a>
+            <a href="logout.php">Logout</a>
         </div>
     </div>
 </body>
