@@ -2,7 +2,9 @@
 session_start();
 require_once("ultilities/validate_field.php");
 require_once("settings.php");
-
+if ($_SESSION['authenticated'] == false) {
+    header("Location: login.php");
+}
 
 ?>
 <!DOCTYPE html>
@@ -23,6 +25,18 @@ require_once("settings.php");
         <div class="bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <h1>My Friend System</h1>
             <?php
+            $conn = @mysqli_connect($host, $user, $pswd); 
+            if ($conn === false) {
+                die("Error: Unable to connect. " . mysqli_connect_error());
+            }
+            if (!@mysqli_select_db($conn, $dbnm)) {
+                die("Error: Unable to select database. " . mysqli_error($conn));
+            }
+            $sql = "SELECT * FROM friends WHERE email = '{$_SESSION['email']}'"; 
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $profile_name = $row['profile_name'];
                 
             ?>
         </div>

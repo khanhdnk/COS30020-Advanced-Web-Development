@@ -66,6 +66,7 @@ require_once("settings.php");
                                 if ($row['password'] == $password) {
                                     echo "<p>Login successfull</p>";
                                     $_SESSION['authenticated'] = true;
+                                    $_SESSION['email'] = $row['friend_email'];
                                     header("Location: index.php");
                                     exit();
                                 } else {
