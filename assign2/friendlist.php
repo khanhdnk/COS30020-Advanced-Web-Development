@@ -34,9 +34,13 @@ if ($_SESSION['authenticated'] == false) {
             }
             $sql = "SELECT * FROM friends WHERE email = '{$_SESSION['email']}'"; 
             $result = mysqli_query($conn, $sql);
-            if (mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_assoc($result);
-                $profile_name = $row['profile_name'];
+            $row = mysqli_fetch_assoc($result);
+            $profile_name = $row['profile_name'];
+            $get_friends = "SELECT f.friend_id, f.profile_name
+            FROM friends f JOIN my_friends mf 
+            ON f.friend_id = mf.friend_id1 OR f.friend_id = mf.friend_id2
+            WHERE (mf.friend_id1 = {$row['']} OR mf.friend_id2 = ?) 
+            AND f.friend_id != ?";
                 
             ?>
         </div>
