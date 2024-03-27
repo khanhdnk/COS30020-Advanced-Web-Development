@@ -72,18 +72,26 @@ $notification = array();
             <h1>Total number of friends is <?php echo $number_of_friends?></h1>
             <?php
             if ($number_of_friends > 0) {
-                echo "<table>";
-                echo "<table>";
+                echo "<table class='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>";
+                echo "<thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>";
+                echo "<tr>
+                <th scope='col' class='px-6 py-3'>
+                    Profile Name
+                </th>
+                <th scope='col' class='px-6 py-3'>
+                    Action
+                </th>
+                </tr>";
+                echo "</thead>";
                 foreach( $result2 as $friend){
-                    echo "<tr>";
-                    echo "<td>{$friend['profile_name']}</td>";
-                    echo "<td>
+                    echo "<tr class='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700'>";
+                    echo "<td class='px-6 py-4'>{$friend['profile_name']}</td>";
+                    echo "<td class='px-6 py-4'>
                                 <form method='post' action='friendlist.php'>
                                 <input type='hidden' name='friendId' value='{$friend['friend_id']}'>
                                 
-                                <input class='btn btn-outline-info' type='submit' name='addfriend' value='Unfriend'>
+                                <input class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' type='submit' name='addfriend' value='Unfriend'>
                                 </form>
-                                {$friend['friend_id'] }                      
                             </td>";
                     echo "</tr>";
                 }

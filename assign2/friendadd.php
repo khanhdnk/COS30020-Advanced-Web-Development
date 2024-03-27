@@ -62,6 +62,7 @@ $notification = array();
             $get_not_friends = "SELECT f.friend_id, f.profile_name FROM friends f WHERE f.friend_id != {$row['friend_id']} AND f.friend_id NOT IN ( SELECT mf.friend_id1 FROM myfriends mf WHERE mf.friend_id2 = {$row['friend_id']}) AND f.friend_id NOT IN ( SELECT mf.friend_id2 FROM myfriends mf WHERE mf.friend_id1 = {$row['friend_id']})";
             //excute query
             $not_friend_result = mysqli_query($conn, $get_not_friends);
+            $total_page = ceil(mysqli_num_rows($not_friend_result));
 
             function add_friend_feature($friend_id, &$notification)
             {
@@ -86,14 +87,24 @@ $notification = array();
             </h1>
             <?php
             if (mysqli_num_rows($not_friend_result) > 0) {
-                echo "<table>";
+                echo "<table class='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>";
+                echo "<thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>";
+                echo "<tr>
+                <th scope='col' class='px-6 py-3'>
+                    Profile Name
+                </th>
+                <th scope='col' class='px-6 py-3'>
+                    Action
+                </th>
+                </tr>";
+                echo "</thead>";
                 foreach ($not_friend_result as $stranger) {
-                    echo "<tr>";
-                    echo "<td>{$stranger['profile_name']}</td>";
-                    echo "<td>
+                    echo "<tr class='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700'>";
+                    echo "<td class='px-6 py-4'>{$stranger['profile_name']}</td>";
+                    echo "<td class='px-6 py-4'>
                     <form method='POST' action='friendadd.php'>
                         <input type='hidden' name='friendId' value='{$stranger['friend_id']}'>
-                        <input class='btn btn-outline-info' type='submit' name='addfriend' value='Add as friend'>
+                        <input class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full'  type='submit' name='addfriend' value='Add as friend'>
                     </form>
                     </td>";
                     echo "</tr>";
@@ -103,7 +114,14 @@ $notification = array();
                 echo "<p>You don't have any friend</p> ";
 
             }
-
+            
+            if ($page_num > 0){
+                echo "<a href='friendlist.php?page_num=$page_num'>Previous</a>";
+            }
+            //offset = pagenum  - 1
+            if ($page_num < $total_page){
+                echo "<a href='friendlist.php?page_num=$page_num'>Next</a>";
+            }
             ?>
             <a href="friendlist.php">Friend List</a>
             <a href="logout.php">Logout</a>
