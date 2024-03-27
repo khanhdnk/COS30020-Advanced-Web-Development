@@ -6,7 +6,8 @@ if ($_SESSION['authenticated'] == false) {
     header("Location: login.php");
 }
 $notification = array();
-
+$page_num = isset($_GET['page_num']) ? intval($_GET['page_num']) : 1;
+$records_per_page = 5; // Number of records to display per page
 
 
 ?>
@@ -36,6 +37,7 @@ $notification = array();
             if (!@mysqli_select_db($conn, $dbnm)) {
                 die("Error: Unable to select database. " . mysqli_error($conn));
             }
+            $offset = ($page_num - 1) * $records_per_page;
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 if (isset($_POST['friendId']) && !empty($_POST['friendId'])) {
                     $the_other_friend_id = $_POST['friendId'];
@@ -59,7 +61,7 @@ $notification = array();
 
 
             //query get friends who is not in the friend list
-            $get_not_friends = "SELECT f.friend_id, f.profile_name FROM friends f WHERE f.friend_id != {$row['friend_id']} AND f.friend_id NOT IN ( SELECT mf.friend_id1 FROM myfriends mf WHERE mf.friend_id2 = {$row['friend_id']}) AND f.friend_id NOT IN ( SELECT mf.friend_id2 FROM myfriends mf WHERE mf.friend_id1 = {$row['friend_id']})";
+            $get_not_friends = "SELECT f.friend_id, f.profile_name FROM friends f WHERE f.friend_id != {$row['friend_id']} AND f.friend_id NOT IN ( SELECT mf.friend_id1 FROM myfriends mf WHERE mf.friend_id2 = {$row['friend_id']}) AND f.friend_id NOT IN ( SELECT mf.friend_id2 FROM myfriends mf WHERE mf.friend_id1 = {$row['friend_id']}) LIMIT {$records_per_page} OFFSET $offset";
             //excute query
             $not_friend_result = mysqli_query($conn, $get_not_friends);
             $total_page = ceil(mysqli_num_rows($not_friend_result));
@@ -115,13 +117,14 @@ $notification = array();
 
             }
             
-            if ($page_num > 0){
-                echo "<a href='friendlist.php?page_num=$page_num'>Previous</a>";
-            }
-            //offset = pagenum  - 1
-            if ($page_num < $total_page){
-                echo "<a href='friendlist.php?page_num=$page_num'>Next</a>";
-            }
+            echo "<div class='mt-4'>";
+                if ($page_num > 1) {
+                    echo "<a href='friendadd.php?page_num=" . ($page_num - 1) . "' class='mr-2'>Previous</a>";
+                }
+                if (mysqli_num_rows($not_friend_result) == $records_per_page) {
+                    echo "<a href='friendadd.php?page_num=" . ($page_num + 1) . "'>Next</a>";
+                }
+                echo "</div>";
             ?>
             <a href="friendlist.php">Friend List</a>
             <a href="logout.php">Logout</a>
