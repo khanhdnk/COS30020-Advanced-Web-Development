@@ -27,7 +27,7 @@ $notification = array();
         <div class="bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <h1>My Friend System</h1>
             <?php
-            $conn = @mysqli_connect($host, $user, $pswd); 
+            $conn = @mysqli_connect($host, $user, $pswd);
             if ($conn === false) {
                 die("Error: Unable to connect. " . mysqli_connect_error());
             }
@@ -39,7 +39,7 @@ $notification = array();
                 $the_other_friend_id = $_POST['friendId'];
                 unfriend($the_other_friend_id, $notification, $conn);
             }
-            $sql = "SELECT * FROM friends WHERE friend_email = '{$_SESSION['email']}'"; 
+            $sql = "SELECT * FROM friends WHERE friend_email = '{$_SESSION['email']}'";
             $result = mysqli_query($conn, $sql);
 
             $row = mysqli_fetch_assoc($result);
@@ -66,18 +66,18 @@ $notification = array();
                 }
             }
 
-                
+
             ?>
             <h1 class="font-bold"><?php echo "$profile_name"?>'s Friend List Page</h1>
             <h1>Total number of friends is <?php echo $number_of_friends?></h1>
             <?php
-                if ($number_of_friends > 0) {
-                    echo "<table>";
-                    echo "<table>";
-                    foreach( $result2 as $friend){
-                        echo "<tr>";
-                        echo "<td>{$friend['profile_name']}</td>";
-                        echo "<td>
+            if ($number_of_friends > 0) {
+                echo "<table>";
+                echo "<table>";
+                foreach( $result2 as $friend){
+                    echo "<tr>";
+                    echo "<td>{$friend['profile_name']}</td>";
+                    echo "<td>
                                 <form method='post' action='friendlist.php'>
                                 <input type='hidden' name='friendId' value='{$friend['friend_id']}'>
                                 
@@ -85,19 +85,19 @@ $notification = array();
                                 </form>
                                 {$friend['friend_id'] }                      
                             </td>";
-                        echo "</tr>";
-                    }
-                    echo "</table>";
-                }else{
-                    echo "<p>You don't have any friend</p> ";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }else{
+                echo "<p>You don't have any friend</p> ";
 
-                }
-                foreach($notification as $noti){
-                    echo "<p>$noti</p>";   
-                }
-                mysqli_close($conn);
+            }
+            foreach($notification as $noti){
+                echo "<p>$noti</p>";
+            }
+            mysqli_close($conn);
             ?>
-            
+
             <a href="friendadd.php">Add Friend</a>
             <a href="logout.php">Logout</a>
         </div>
