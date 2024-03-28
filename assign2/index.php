@@ -237,11 +237,11 @@
 
 
             ?>
-            <a href="signup.php" class="underline text-blue-700 block mt-3 w-60">Sign up <span
+            <a href="signup.php" class="underline text-blue-700 block mt-1 w-60">Sign up <span
                     class="text-xl ">&#x203A</span> </a>
-            <a href="login.php" class="underline text-blue-700 block mt-3 w-60">Login <span
+            <a href="login.php" class="underline text-blue-700 block mt-1 w-60">Login <span
                     class="text-xl">&#x203A</span> </a>
-            <a href="about.php" class="underline text-blue-700 block mt-3 w-60">About <span
+            <a href="about.php" class="underline text-blue-700 block mt-1 w-60">About <span
                     class="text-xl">&#x203A</span> </a>
 
         </div>
