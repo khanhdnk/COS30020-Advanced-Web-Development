@@ -14,13 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         die("Error: Unable to select database. " . mysqli_error($conn));
     }
     $errmsg = array();
+    //validate the fields and generate error messages
     $email = validate_field($_POST['email'], '/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/', $errmsg, "Invalid email format", "email");
     $profile_name = validate_field($_POST['profilename'], '/^[a-zA-Z]+$/', $errmsg, "Profile must contain only letters and cannot be blank", "profile name");
     $password = validate_field($_POST['password'], '/^[a-zA-Z0-9]+$/', $errmsg, "Password must contain only letters and numbers and cannot be blank", "password");
     $confirm_password = validate_field($_POST['confirmpassword'], '/^[a-zA-Z0-9]+$/', $errmsg, "Password must contain only letters and numbers and cannot be blank", "confirm password");
     // Checking the email field
     $is_unique_email = check_unique_email($email, $conn, $errmsg);
-    if ($email && $profile_name && $password && $confirm_password && $is_unique_email){
+    if ($email && $profile_name && $password && $confirm_password && $is_unique_email) {
         if ($password == $confirm_password) {
 
             // or die('Database not available');
@@ -67,7 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
             <!-- Logo -->
             <div class="text-indigo-500 md:order-1">
-                <img width="60" height="60" src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-friend-friendship-wanicon-lineal-wanicon.png" alt="external-friend-friendship-wanicon-lineal-wanicon"/>
+                <img width="60" height="60"
+                     src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-friend-friendship-wanicon-lineal-wanicon.png"
+                     alt="external-friend-friendship-wanicon-lineal-wanicon"/>
             </div>
             <!-- Menu -->
             <div class=" order-3 w-full md:w-auto md:order-2">
@@ -90,33 +93,32 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </nav>
     <div class="container mx-auto py-10 flex justify-center items-center ">
         <div
-            class="animate__animated animate__fadeInDown bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
+                class="animate__animated animate__fadeInDown bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <form action="signup.php" method="POST" novalidate>
                 <h1 class="font-bold text-center text-2xl mb-10">MyFriend System Registration Page</h1>
 
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email"
-                    class="w-full p-2 border border-black border-opacity-20 rounded-lg"
-                    value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                       class="w-full p-2 border border-black border-opacity-20 rounded-lg"
+                       value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
 
                 <label for="profilename">Profile Name</label>
                 <input type="text" name="profilename" id="profilename"
-                    class="w-full p-2 border border-black border-opacity-20 rounded-lg"
-                    value="<?= isset($_POST['profilename']) ? $_POST['profilename'] : '' ?>">
+                       class="w-full p-2 border border-black border-opacity-20 rounded-lg"
+                       value="<?= isset($_POST['profilename']) ? $_POST['profilename'] : '' ?>">
 
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password"
-                    class="w-full p-2 border border-black border-opacity-20 rounded-lg">
+                       class="w-full p-2 border border-black border-opacity-20 rounded-lg">
 
                 <label for="confirmpassword">Confirm Password</label>
                 <input type="password" name="confirmpassword" id="confirmpassword"
-                    class="w-full p-2 border border-black border-opacity-20 rounded-lg">
+                       class="w-full p-2 border border-black border-opacity-20 rounded-lg">
 
 
                 <button type="submit" class="w-full bg-black text-gray-50 p-2 rounded-lg mt-4">Register</button>
 
                 <button type="reset" class="w-full bg-red-500 text-gray-50 p-2 rounded-lg mt-4">Clear</button>
-
 
 
             </form>
@@ -128,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 }
             }
             ?>
-<!--            link back to home page-->
+            <!--            link back to home page-->
             <a href="index.php" class="underline text-blue-700 block mt-3 w-60">Home <span
                         class="text-xl ">&#x203A</span></a>
         </div>

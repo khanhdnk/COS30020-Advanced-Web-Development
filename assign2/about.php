@@ -15,7 +15,9 @@
         <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
             <!-- Logo -->
             <div class="text-indigo-500 md:order-1">
-                <img width="60" height="60" src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-friend-friendship-wanicon-lineal-wanicon.png" alt="external-friend-friendship-wanicon-lineal-wanicon"/>
+                <img width="60" height="60"
+                     src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-friend-friendship-wanicon-lineal-wanicon.png"
+                     alt="external-friend-friendship-wanicon-lineal-wanicon"/>
             </div>
             <!-- Navigation -->
             <div class=" order-3 w-full md:w-auto md:order-2">
@@ -25,6 +27,7 @@
                     <li class="md:px-4 md:py-2 text-purple-600"><a href="about.php">About</a></li>
                 </ul>
             </div>
+<!--            link back to home page-->
             <div class="order-2 md:order-3">
                 <a href="index.php">
                     <button class="bg-black px-4 py-2  text-gray-50 rounded-full flex items-center gap-2">
@@ -48,41 +51,34 @@
                 <li>
                     <p>Some special features that I made:</p>
                     <ul class="list-decimal ml-7">
-                        <li>...</li>
-                        <li>...</li>
-                        <li>...</li>
+                        <li>Sanitise inputs</li>
+                        <li>Friend detail for friend add page</li>
                     </ul>
                 </li>
                 <li>I have trouble with the add friends and unfriends features, but I have overcome it</li>
                 <li>Next time I will create better UI with interesting animations</li>
                 <li>Additional features:
                     <ul class="list-decimal ml-7">
-                        <li>...</li>
-                        <li>...</li>
-                        <li>...</li>
+                        <li>Friend details when user click on the name of the friend in the friend add page</li>
                     </ul>
                 </li>
 
             </ul>
-
+<!--            link to pages-->
             <p class="text-lg"><strong>Req 3:</strong></p>
             <ul class="list-disc"> Links to pages:
-                <li><a href="friendlist.php">Friend List </a></li>
-                <li><a href="friendadd.php">Add Friends</a></li>
-                <li><a href="index.php">Home Page </a></li>
+                <li><a href="friendlist.php" class="underline text-blue-700 block mt-3 w-60">Friend List </a></li>
+                <li><a href="friendadd.php" class="underline text-blue-700 block mt-3 w-60">Add Friends</a></li>
+                <li><a href="index.php" class="underline text-blue-700 block mt-3 w-60">Home Page </a></li>
             </ul>
             <!--            figure 1 and figure 2 are the screenshots of the discussion page-->
             <p class="text-lg"><strong>Req 3:</strong></p>
             <figure class="my-5">
-                <img src="style/discussion1.png" alt="discussion1" class="">
+                <img src="images/discussion.png" alt="discussion1" class="">
                 <figcaption class="text-center text-sm">Figure 1: Discussion 1</figcaption>
             </figure>
-            <hr class="border border-black">
-            <figure class="my-5">
-                <img src="style/discussion2.png" alt="discussion2" class="">
-                <figcaption class="text-center text-sm">Figure 2: Discussion 2</figcaption>
-            </figure>
-            <a href="index.php" class="underline text-blue-700 block mt-3 w-60">Return to Home Page <span class="text-xl ">&#x203A</span></a>
+            <a href="index.php" class="underline text-blue-700 block mt-3 w-60">Return to Home Page <span
+                        class="text-xl ">&#x203A</span></a>
         </div>
 </body>
 </html>

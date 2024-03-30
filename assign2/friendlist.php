@@ -30,7 +30,9 @@ $notification = array();
         <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
             <!-- Logo -->
             <div class="text-indigo-500 md:order-1">
-                <img width="60" height="60" src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-friend-friendship-wanicon-lineal-wanicon.png" alt="external-friend-friendship-wanicon-lineal-wanicon"/>
+                <img width="60" height="60"
+                     src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-friend-friendship-wanicon-lineal-wanicon.png"
+                     alt="external-friend-friendship-wanicon-lineal-wanicon"/>
             </div>
             <!-- Menu -->
             <div class=" order-3 w-full md:w-auto md:order-2">
@@ -53,7 +55,8 @@ $notification = array();
     </nav>
     <div class="container mx-auto py-10 flex justify-center items-center ">
         <div class="animate__animated animate__slideInUp bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl limitwidth">
-            <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">My Friend System</h1>
+            <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">
+                My Friend System</h1>
             <?php
             $conn = @mysqli_connect($host, $user, $pswd);
             if ($conn === false) {
@@ -62,12 +65,13 @@ $notification = array();
             if (!@mysqli_select_db($conn, $dbnm)) {
                 die("Error: Unable to select database. " . mysqli_error($conn));
             }
-
+            //get the profile name of the user logged in
             $sql = "SELECT * FROM friends WHERE friend_email = '{$_SESSION['email']}'";
             $result = mysqli_query($conn, $sql);
 
             $row = mysqli_fetch_assoc($result);
             $profile_name = $row['profile_name'];
+            //get the friends of the user logged in
             $get_friends = "SELECT f.friend_id, f.profile_name
             FROM friends f JOIN myfriends mf
             ON f.friend_id = mf.friend_id1 OR f.friend_id = mf.friend_id2
@@ -76,8 +80,8 @@ $notification = array();
             $result2 = mysqli_query($conn, $get_friends);
             $number_of_friends = mysqli_num_rows($result2);
 
-            function unfriend($friend_id, &$notification, &$connect, $number_of_friends){
-                echo "activated";
+            function unfriend($friend_id, &$notification, &$connect, $number_of_friends)
+            {
                 $number_of_friends_of_the_other = "SELECT f.friend_id, f.profile_name
                 FROM friends f JOIN myfriends mf
                 ON f.friend_id = mf.friend_id1 OR f.friend_id = mf.friend_id2
@@ -89,9 +93,7 @@ $notification = array();
                 //get the number of friends of the other user
                 $number_of_friends_of_stranger = mysqli_num_rows($result1);
 
-
-
-
+                //unfriend the user
                 $sqli = "DELETE FROM myfriends WHERE (friend_id1 = {$_SESSION['friend_id']} AND friend_id2 = {$friend_id}) OR (friend_id1 = {$friend_id} AND friend_id2 = {$_SESSION['friend_id']})";
                 $unfriend_result = mysqli_query($connect, $sqli);
                 //echo error query
@@ -99,9 +101,9 @@ $notification = array();
                     echo "Error: " . $sqli . "<br>" . mysqli_error($connect);
                 }
                 if ($unfriend_result) {
-                    $notification[] =  "<p class='text-green-500'>Unfriend successfully</p>";
-                }else{
-                    $notification[] =  "<p class='text-red-500'>Unfriend failed</p>";
+                    $notification[] = "<p class='text-green-500'>Unfriend successfully</p>";
+                } else {
+                    $notification[] = "<p class='text-red-500'>Unfriend failed</p>";
                 }
 
                 //update the number of friends of current user logged in
@@ -113,12 +115,10 @@ $notification = array();
                 $update_stranger_user_nof = mysqli_query($connect, $sql_other_user_update);
 
 
-
-
-
             }
+
             //if the user click on the unfriend button
-            if ($_SERVER['REQUEST_METHOD'] == "POST"){
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 if (isset($_POST['friendId'])) {
                     $the_other_friend_id = $_POST['friendId'];
                     echo "hello";
@@ -131,8 +131,8 @@ $notification = array();
 
 
             ?>
-            <h1 class="font-bold"><?php echo "$profile_name"?>'s Friend List Page</h1>
-            <h1 class="italic text-right mt-3">Total number of friends is <?php echo $number_of_friends?></h1>
+            <h1 class="font-bold"><?php echo "$profile_name" ?>'s Friend List Page</h1>
+            <h1 class="italic text-right mt-3">Total number of friends is <?php echo $number_of_friends ?></h1>
             <?php
             if ($number_of_friends > 0) {
                 echo "<table class=' w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>";
@@ -146,7 +146,7 @@ $notification = array();
                 </th>
                 </tr>";
                 echo "</thead>";
-                foreach( $result2 as $friend){
+                foreach ($result2 as $friend) {
                     echo "<tr class='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700'>";
                     echo "<td class='px-6 py-4'>{$friend['profile_name']}</td>";
                     echo "<td class='px-6 py-4'>
@@ -159,10 +159,10 @@ $notification = array();
                     echo "</tr>";
                 }
                 echo "</table>";
-            }else{
+            } else {
                 echo "<p class='mt-4 text-yellow-400'>You don't have any friend</p> ";
             }
-            foreach($notification as $noti){
+            foreach ($notification as $noti) {
                 echo "<p>$noti</p>";
             }
             mysqli_close($conn);
@@ -170,7 +170,7 @@ $notification = array();
 
             <a href="friendadd.php" class="underline text-blue-700 block mt-3 w-60">Add Friend <span
                         class="text-xl ">&#x203A</span></a>
-            <a href="logout.php" class="underline text-blue-700 block mt-3 w-60">Logout  <span
+            <a href="logout.php" class="underline text-blue-700 block mt-3 w-60">Logout <span
                         class="text-xl ">&#x203A</span></a>
         </div>
     </div>

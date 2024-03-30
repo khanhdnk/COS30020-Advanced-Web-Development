@@ -2,10 +2,13 @@
 session_start();
 require_once("ultilities/validate_field.php");
 require_once("settings.php");
+//check if the user is authenticated
 if ($_SESSION['authenticated'] == false) {
     header("Location: login.php");
 }
+
 $notification = array();
+//checking for page number
 $page_num = isset($_GET['page_num']) ? intval($_GET['page_num']) : 1;
 $records_per_page = 5; // Number of records to display per page
 
@@ -32,7 +35,9 @@ $records_per_page = 5; // Number of records to display per page
         <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
             <!-- Logo -->
             <div class="text-indigo-500 md:order-1">
-                <img width="60" height="60" src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-friend-friendship-wanicon-lineal-wanicon.png" alt="external-friend-friendship-wanicon-lineal-wanicon"/>
+                <img width="60" height="60"
+                     src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-friend-friendship-wanicon-lineal-wanicon.png"
+                     alt="external-friend-friendship-wanicon-lineal-wanicon"/>
             </div>
             <!-- Menu -->
             <div class=" order-3 w-full md:w-auto md:order-2">
@@ -55,9 +60,11 @@ $records_per_page = 5; // Number of records to display per page
     </nav>
     <div class="container mx-auto py-10 flex justify-center items-center ">
         <div
-            class="animate__animated animate__slideInUp bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
-            <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">My Friend System</h1>
+                class="animate__animated animate__slideInUp bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
+            <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">
+                My Friend System</h1>
             <?php
+            //create connection
             $conn = @mysqli_connect($host, $user, $pswd);
             if ($conn === false) {
                 die("Error: Unable to connect. " . mysqli_connect_error());
@@ -65,8 +72,10 @@ $records_per_page = 5; // Number of records to display per page
             if (!@mysqli_select_db($conn, $dbnm)) {
                 die("Error: Unable to select database. " . mysqli_error($conn));
             }
+            //calculate offset based on page number
             $offset = ($page_num - 1) * $records_per_page;
 
+            //query get the current user's data
             $sql = "SELECT * FROM friends WHERE friend_email = '{$_SESSION['email']}'";
             $result = mysqli_query($conn, $sql);
 
@@ -103,7 +112,7 @@ $records_per_page = 5; // Number of records to display per page
                 //get the number of friends of the other user
                 $number_of_friends_of_stranger = mysqli_num_rows($result1);
 
-
+                //add friend
                 $sql = "INSERT INTO myfriends (friend_id1, friend_id2) VALUES ({$_SESSION['friend_id']}, {$friend_id})";
                 $trigger_add_friend = mysqli_query($conn, $sql);
                 if (!$trigger_add_friend) {
@@ -159,8 +168,9 @@ $records_per_page = 5; // Number of records to display per page
                 $count = mysqli_fetch_assoc($mutal_friend_result);
                 return $count["mutual_friend_count"];
             }
+
             if (mysqli_num_rows($not_friend_result) > 0) {
-                
+
 
                 echo "<table class=' w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>";
                 echo "<thead class='text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400'>";
@@ -178,7 +188,7 @@ $records_per_page = 5; // Number of records to display per page
                 echo "</thead>";
                 foreach ($not_friend_result as $stranger) {
                     echo "<tr class='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700'>";
-                    echo "<td class='px-6 py-4'>{$stranger['profile_name']} + {$stranger['friend_id']}</td>";
+                    echo "<td class='px-6 py-4'><a href='frienddetails.php?f_id={$stranger['friend_id']}' class='underline'>{$stranger['profile_name']} + {$stranger['friend_id']}</a> </td>";
                     echo "<td class='px-6 py-4'>";
                     echo get_mutual_of_two_user($row['friend_id'], $stranger['friend_id']) . " mutual friends";
                     echo "</td>";
@@ -195,7 +205,7 @@ $records_per_page = 5; // Number of records to display per page
                 echo "<p>You don't have any friend</p> ";
 
             }
-            
+
             echo "<div class='mt-4 flex justify-between px-5'>";
             $previousButton = "<div></div>";
             if ($page_num > 1) {
@@ -218,7 +228,7 @@ $records_per_page = 5; // Number of records to display per page
             ?>
             <a href="friendlist.php" class="underline text-blue-700 block mt-3 w-60">Friend List <span
                         class="text-xl ">&#x203A</span></a>
-            <a href="logout.php"  class="underline text-blue-700 block mt-3 w-60">Logout <span
+            <a href="logout.php" class="underline text-blue-700 block mt-3 w-60">Logout <span
                         class="text-xl ">&#x203A</span></a>
         </div>
     </div>

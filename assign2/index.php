@@ -15,7 +15,9 @@
         <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
             <!-- Logo -->
             <div class="text-indigo-500 md:order-1">
-                <img width="60" height="60" src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-friend-friendship-wanicon-lineal-wanicon.png" alt="external-friend-friendship-wanicon-lineal-wanicon"/>
+                <img width="60" height="60"
+                     src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-friend-friendship-wanicon-lineal-wanicon.png"
+                     alt="external-friend-friendship-wanicon-lineal-wanicon"/>
             </div>
             <!-- Menu -->
             <div class=" order-3 w-full md:w-auto md:order-2">
@@ -38,10 +40,10 @@
     </nav>
     <div class="container mx-auto py-10 flex justify-center items-center ">
         <div
-            class="bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
+                class="bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <h1
-                class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">
-                Job Vacancy Posting System</h1>
+                    class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">
+                My friend system</h1>
             <!--            student's information-->
             <p><strong>Name:</strong> Dang Nam Khanh</p>
             <p><strong>Student ID:</strong> 104225661</p>
@@ -52,6 +54,7 @@
             <br>
             <?php
             require_once("settings.php");
+            // Create connection
             $conn = @mysqli_connect($host, $user, $pswd);
             if ($conn === false) {
                 die("Error: Unable to connect. " . mysqli_connect_error());
@@ -64,6 +67,7 @@
             if (!$conn) {
                 echo "<p>Database connection failure</p>";
             } else {
+                //create the friends table
                 $sql_create_first_table = "CREATE TABLE IF NOT EXISTS friends (
                     friend_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     friend_email VARCHAR(50) NOT NULL,
@@ -80,7 +84,7 @@
                     echo "<p>Table 'friends' creation failure." . mysqli_error($conn) . "</p>";
                 }
 
-
+                //create the myfriends table
                 $sql_create_second_table = "CREATE TABLE IF NOT EXISTS myfriends (
                     friend_id1 INT NOT NULL,
                     friend_id2 INT NOT NULL
@@ -94,13 +98,14 @@
                     echo "<p>Table 'myfriends' creation failure." . mysqli_error($conn) . "</p>";
                 }
 
-
+                //check if the friends tables have records
                 $query_first_table = "SELECT * FROM friends";
                 $result3 = mysqli_query($conn, $query_first_table);
                 if ($result3) {
                     if (mysqli_num_rows($result3) > 0) {
                         echo "<p>Table 'friends' has records</p>";
                     } else {
+                        //if the table has no records, add records to the table
                         $sql_add_friends = "INSERT INTO friends (friend_email, password, profile_name, date_started, num_of_friends) VALUES
                             ('john@example.com', 'password123', 'John Doe', '2023-01-15', 25),
                             ('alice@example.com', 'alicepass', 'Alice Smith', '2023-02-28', 30),
@@ -121,13 +126,14 @@
                         }
                     }
                 }
-
+//                check if the myfriends table has records
                 $query_second_table = "SELECT * FROM myfriends";
                 $result5 = mysqli_query($conn, $query_second_table);
                 if ($result5) {
                     if (mysqli_num_rows($result5) > 0) {
                         echo "<p>Table 'myfriends' has records</p>";
                     } else {
+                        //if the table has no records, add records to the table
                         $sql_add_myfriends = "INSERT INTO myfriends (friend_id1, friend_id2) VALUES
                         (1,2),
                         (1,3),
@@ -162,18 +168,17 @@
                 }
 
 
-
-                mysqli_close($conn);
+            mysqli_close($conn);
             }
 
 
             ?>
             <a href="signup.php" class="underline text-blue-700 block mt-1 w-60">Sign up <span
-                    class="text-xl ">&#x203A</span> </a>
+                        class="text-xl ">&#x203A</span> </a>
             <a href="login.php" class="underline text-blue-700 block mt-1 w-60">Login <span
-                    class="text-xl">&#x203A</span> </a>
+                        class="text-xl">&#x203A</span> </a>
             <a href="about.php" class="underline text-blue-700 block mt-1 w-60">About <span
-                    class="text-xl">&#x203A</span> </a>
+                        class="text-xl">&#x203A</span> </a>
 
         </div>
     </div>
