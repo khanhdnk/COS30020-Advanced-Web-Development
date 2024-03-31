@@ -209,7 +209,7 @@ $records_per_page = 5; // Number of records to display per page
                 echo "</thead>";
                 foreach ($not_friend_result as $stranger) {
                     echo "<tr class='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700'>";
-                    echo "<td class='px-6 py-4'><a href='frienddetails.php?f_id={$stranger['friend_id']}' class='underline'>{$stranger['profile_name']} + {$stranger['friend_id']}</a> <i class='fa-solid fa-magnifying-glass'></i></td>";
+                    echo "<td class='px-6 py-4'><a href='frienddetails.php?f_id={$stranger['friend_id']}' class='underline'>{$stranger['profile_name']}</a> <i class='fa-solid fa-magnifying-glass'></i></td>";
                     echo "<td class='px-6 py-4'>";
                     echo get_mutual_of_two_user($row['friend_id'], $stranger['friend_id']) . " mutual friends";
                     echo "</td>";

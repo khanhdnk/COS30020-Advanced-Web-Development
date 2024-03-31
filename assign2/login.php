@@ -107,7 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <button type="submit" class="w-full bg-black text-gray-50 p-2 rounded-lg mt-4">Login</button>
 
-                <button type="reset" class="w-full bg-red-500 text-gray-50 p-2 rounded-lg mt-4">Clear</button>
+<!--                <button type="reset" class="w-full bg-red-500 text-gray-50 p-2 rounded-lg mt-4">Clear</button>-->
+                <a href="login.php" class="block bg-red-500 text-gray-50 p-2 rounded-lg mt-4 text-center">Clear</a>
 
 
             </form>

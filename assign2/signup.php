@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </nav>
     <div class="container mx-auto py-10 flex justify-center items-center ">
         <div
-                class="animate__animated animate__fadeInDown bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
+                class="animate__animated animate__fadeIn bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <form action="signup.php" method="POST" novalidate>
                 <h1 class="font-bold text-center text-2xl mb-10">MyFriend System Registration Page</h1>
 
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <button type="submit" class="w-full bg-black text-gray-50 p-2 rounded-lg mt-4">Register</button>
 
-                <button type="reset" class="w-full bg-red-500 text-gray-50 p-2 rounded-lg mt-4">Clear</button>
+                <a href="signup.php" class="block bg-red-500 text-gray-50 p-2 rounded-lg mt-4 text-center">Clear</a>
 
 
             </form>
