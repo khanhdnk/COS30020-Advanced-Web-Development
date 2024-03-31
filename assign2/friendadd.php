@@ -23,6 +23,8 @@ $records_per_page = 5; // Number of records to display per page
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -60,7 +62,7 @@ $records_per_page = 5; // Number of records to display per page
     </nav>
     <div class="container mx-auto py-10 flex justify-center items-center ">
         <div
-                class="animate__animated animate__slideInUp bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
+                class="animate__animated animate__fadeIn bg-gray-50 bg-opacity-30 border border-black border-opacity-20 p-3 md:p-10 rounded-lg shadow-lg max-w-2xl">
             <h1 class="h-14 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-pink-500 to-blue-500 text-center mb-4 text-2xl font-extrabold leading-none tracking-tight  md:text-3xl lg:text-4xl dark:text-white">
                 My Friend System</h1>
             <?php
@@ -73,7 +75,6 @@ $records_per_page = 5; // Number of records to display per page
                 die("Error: Unable to select database. " . mysqli_error($conn));
             }
             //calculate offset based on page number
-            $offset = ($page_num - 1) * $records_per_page;
 
             //query get the current user's data
             $sql = "SELECT * FROM friends WHERE friend_email = '{$_SESSION['email']}'";
@@ -90,6 +91,26 @@ $records_per_page = 5; // Number of records to display per page
             //excute query
             $current_friend_result = mysqli_query($conn, $get_current_friend);
             $number_of_friends = mysqli_num_rows($current_friend_result);
+
+            // Query to get the total number of friends not in the friend list
+            $get_total_not_friends = "SELECT COUNT(*) as total FROM friends f WHERE f.friend_id != {$row['friend_id']} AND f.friend_id NOT IN ( SELECT mf.friend_id1 FROM myfriends mf WHERE mf.friend_id2 = {$row['friend_id']}) AND f.friend_id NOT IN ( SELECT mf.friend_id2 FROM myfriends mf WHERE mf.friend_id1 = {$row['friend_id']})";
+
+            // Execute the query
+            $total_not_friends_result = mysqli_query($conn, $get_total_not_friends);
+
+            // Fetch the result
+            $total_not_friends_row = mysqli_fetch_assoc($total_not_friends_result);
+
+            // Calculate the total number of pages
+            $total_pages = ceil($total_not_friends_row['total'] / $records_per_page);
+            if ($page_num > $total_pages) {
+                $page_num = $total_pages;
+            }
+            if ($page_num < 1) {
+                $page_num = 1;
+            }
+            $offset = ($page_num - 1) * $records_per_page;
+
 
 
             //query get friends who is not in the friend list
@@ -188,7 +209,7 @@ $records_per_page = 5; // Number of records to display per page
                 echo "</thead>";
                 foreach ($not_friend_result as $stranger) {
                     echo "<tr class='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700'>";
-                    echo "<td class='px-6 py-4'><a href='frienddetails.php?f_id={$stranger['friend_id']}' class='underline'>{$stranger['profile_name']} + {$stranger['friend_id']}</a> </td>";
+                    echo "<td class='px-6 py-4'><a href='frienddetails.php?f_id={$stranger['friend_id']}' class='underline'>{$stranger['profile_name']} + {$stranger['friend_id']}</a> <i class='fa-solid fa-magnifying-glass'></i></td>";
                     echo "<td class='px-6 py-4'>";
                     echo get_mutual_of_two_user($row['friend_id'], $stranger['friend_id']) . " mutual friends";
                     echo "</td>";
@@ -202,7 +223,7 @@ $records_per_page = 5; // Number of records to display per page
                 }
                 echo "</table>";
             } else {
-                echo "<p>You don't have any friend</p> ";
+                echo "<p class='text-center mt-5 text-blue-600'>There are no friends to add</p> ";
 
             }
 
@@ -214,7 +235,10 @@ $records_per_page = 5; // Number of records to display per page
 
             // Store the HTML for the "Next" button
             $nextButton = "";
-            if (mysqli_num_rows($not_friend_result) == $records_per_page) {
+//            if (mysqli_num_rows($not_friend_result) == $records_per_page) {
+//                $nextButton = "<a href='friendadd.php?page_num=" . ($page_num + 1) . "' class='bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-red-500 hover:via-purple-500 hover:to-pink-500 text-white font-bold py-1 px-6 rounded-full shadow-lg transition duration-300 transform hover:scale-105'>Next</a>";
+//            }
+            if ($page_num < $total_pages) {
                 $nextButton = "<a href='friendadd.php?page_num=" . ($page_num + 1) . "' class='bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-red-500 hover:via-purple-500 hover:to-pink-500 text-white font-bold py-1 px-6 rounded-full shadow-lg transition duration-300 transform hover:scale-105'>Next</a>";
             }
 
@@ -225,6 +249,7 @@ $records_per_page = 5; // Number of records to display per page
             foreach ($notification as $noti) {
                 echo "<p>$noti</p>";
             }
+            mysqli_close($conn)
             ?>
             <a href="friendlist.php" class="underline text-blue-700 block mt-3 w-60">Friend List <span
                         class="text-xl ">&#x203A</span></a>
