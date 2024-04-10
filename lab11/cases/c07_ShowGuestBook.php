@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Guest Book</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
+
 <body>
     <?php
-    $DBConnect = @mysqli_connect("localhost", "dongosselin", "rosebud")
+    $DBConnect = @mysqli_connect("feenix-mariadb.swin.edu.au", "s104225661", "280504")
     or die("<p>Unable to connect to the database server.</p>"
         . "<p>Error code " . mysqli_connect_errno()
         . ": " . mysqli_connect_error()) . "</p>";
-    $DBName = "guestbook";
+    $DBName = "s104225661_db";
     if (!@mysqli_select_db($DBConnect, $DBName))
         die("<p>There are no entries in the guest book!</p>");
     $TableName = "visitors";
@@ -31,4 +33,5 @@
     mysqli_close($DBConnect);
     ?>
 </body>
+
 </html>

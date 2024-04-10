@@ -93,6 +93,7 @@ $records_per_page = 5; // Number of records to display per page
             $number_of_friends = mysqli_num_rows($current_friend_result);
 
             // Query to get the total number of friends not in the friend list
+            //get page num
             $get_total_not_friends = "SELECT COUNT(*) as total FROM friends f WHERE f.friend_id != {$row['friend_id']} AND f.friend_id NOT IN ( SELECT mf.friend_id1 FROM myfriends mf WHERE mf.friend_id2 = {$row['friend_id']}) AND f.friend_id NOT IN ( SELECT mf.friend_id2 FROM myfriends mf WHERE mf.friend_id1 = {$row['friend_id']})";
 
             // Execute the query
